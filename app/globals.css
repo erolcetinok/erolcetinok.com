@@ -7,6 +7,10 @@
 :root {
   --background: #dfdac4;
   --foreground: #000000;
+
+  --max-width: 1080px;
+  --page-padding: 20px;
+  --border-color: color-mix(in srgb, var(--foreground) 15%, transparent);
 }
 
 /* Tailwind v4 theme bridge */
@@ -14,13 +18,12 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Optional: keep Tailwind font hooks intact */
   --font-sans: var(--font-inter);
   --font-serif: var(--font-libre);
 }
 
 /* Dark mode palette */
-@media (prefers-color-scheme: black) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: #000000;
     --foreground: #dfdac4;
@@ -35,53 +38,23 @@ body {
   background: var(--background);
   color: var(--foreground);
 
-  /* Body text uses Libre Baskerville */
+  /* Everything defaults to Libre Baskerville */
   font-family: var(--font-libre), serif;
 }
 
-/* =========================
-   Typography roles
-   ========================= */
-
-/* Headings → Inter */
+/* Make sure headings stay Libre too */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-}
-
-/* Body text → Libre Baskerville */
-p,
-li,
-blockquote,
-figcaption {
-  font-family: var(--font-libre), serif;
-  line-height: 1.7;
-}
-
-/* Optional: smaller UI text */
-.small,
-.meta,
-.caption {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 0.85rem;
-  opacity: 0.75;
+  font-family: inherit;
 }
 
 /* =========================
    Layout constants
    ========================= */
-
-:root {
-  --max-width: 1080px;
-  --page-padding: 20px;
-  --border-color: color-mix(in srgb, var(--foreground) 15%, transparent);
-}
 
 .page {
   max-width: var(--max-width);
@@ -91,14 +64,13 @@ figcaption {
 }
 
 /* =========================
-   Header (Inter)
+   Header (Inter only)
    ========================= */
 
 .site-header {
   border-bottom: 1px solid var(--border-color);
   background: var(--background);
 
-  /* UI font */
   font-family: var(--font-inter), sans-serif;
 }
 
@@ -156,14 +128,13 @@ figcaption {
 }
 
 /* =========================
-   Footer (Inter)
+   Footer (Inter only)
    ========================= */
 
 .site-footer {
   border-top: 1px solid var(--border-color);
   background: var(--background);
 
-  /* Footer is UI text → Inter */
   font-family: var(--font-inter), sans-serif;
 }
 
