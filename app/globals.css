@@ -12,10 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #dfdac4;
+    --foreground: #4d2f2c;
   }
 }
 
@@ -24,10 +24,6 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-/* =========================
-   Layout Container
-   ========================= */
 
 :root {
   --max-width: 1080px;
