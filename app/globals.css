@@ -20,7 +20,7 @@
 }
 
 /* Dark mode palette */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: black) {
   :root {
     --background: #000000;
     --foreground: #dfdac4;
@@ -37,6 +37,40 @@ body {
 
   /* Body text uses Libre Baskerville */
   font-family: var(--font-libre), serif;
+}
+
+/* =========================
+   Typography roles
+   ========================= */
+
+/* Headings → Inter */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Body text → Libre Baskerville */
+p,
+li,
+blockquote,
+figcaption {
+  font-family: var(--font-libre), serif;
+  line-height: 1.7;
+}
+
+/* Optional: smaller UI text */
+.small,
+.meta,
+.caption {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.85rem;
+  opacity: 0.75;
 }
 
 /* =========================
