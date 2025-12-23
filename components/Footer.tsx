@@ -8,10 +8,21 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="site-footer__inner site-footer__inner--stacked">
         {/* Brand (scaled down vs header) */}
-        <Link href="/" className="footer-brand footer-brand--stacked">
-          <Image src="/logo.png" alt="Erol Cetinok logo" width={42} height={42} />
-          <span className="footer-brand__name">Erol Cetinok</span>
-        </Link>
+        <Link
+  href="/"
+  className="footer-brand footer-brand--stacked"
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+>
+  <Image
+    src="/logo.png"
+    alt="Erol Cetinok logo"
+    width={42}
+    height={42}
+  />
+  <span className="footer-brand__name">Erol Cetinok</span>
+</Link>
 
         {/* Social icons */}
         <div className="footer-links footer-links--centered">
