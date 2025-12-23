@@ -35,8 +35,43 @@ body {
   background: var(--background);
   color: var(--foreground);
 
-  /* Body text uses Libre Baskerville */
-  font-family: var(--font-libre), serif;
+  /* System monospace stack (SF Mono on macOS) */
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+
+  /* Refinement tweaks */
+  font-size: 15px;       /* slightly smaller than default */
+  line-height: 1.6;      /* improves readability */
+  letter-spacing: -0.01em; /* subtle tightening */
+}
+
+/* Headings: same font, but more visual weight */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Optional: size hierarchy */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.6em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4em;
 }
 
 /* =========================
