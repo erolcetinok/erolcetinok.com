@@ -328,6 +328,12 @@ small,
   text-underline-offset: 4px;
 }
 
+.footer-brand {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
 .brand {
   cursor: pointer;
 }

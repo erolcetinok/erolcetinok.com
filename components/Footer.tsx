@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const year = new Date().getFullYear();
 
@@ -7,10 +8,10 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="site-footer__inner site-footer__inner--stacked">
         {/* Brand (scaled down vs header) */}
-        <div className="footer-brand footer-brand--stacked">
+        <Link href="/" className="footer-brand footer-brand--stacked">
           <Image src="/logo.png" alt="Erol Cetinok logo" width={42} height={42} />
           <span className="footer-brand__name">Erol Cetinok</span>
-        </div>
+        </Link>
 
         {/* Social icons */}
         <div className="footer-links footer-links--centered">
