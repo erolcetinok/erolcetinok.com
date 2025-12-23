@@ -21,10 +21,10 @@ const navItems = [
 
 // React component that renders your site header.
 // Because layout.tsx includes <Header />, this appears on every page.
-export default function Header() {
+export default function Header({ className }: { className?: string }) {
   return (
     // The outer header container (styled by .site-header in globals.css)
-    <header className="site-header">
+    <header className={`site-header ${className || ''}`}>
       {/* Inner container controls max width + flex layout */}
       <div className="site-header__inner">
         {/* Brand link: clicking your name/logo returns to homepage */}

@@ -8,8 +8,7 @@ import { Libre_Baskerville } from "next/font/google";
 
 // Configure Inter for headers
 const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
+  subsets: ["latin"]
 });
 
 // Configure Libre Baskerville for body text
@@ -32,10 +31,10 @@ export default function RootLayout({
 }) {
   return (
     // This becomes the actual HTML document structure
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body className={libreBaskerville.className}>
         {/* Top navigation shown on every page */}
-        <Header />
+        <Header className={inter.className} />
 
         {/* Main content area. The page class sets max-width/padding. */}
         <main className="page">{children}</main>
