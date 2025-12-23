@@ -22,14 +22,6 @@
   --font-serif: var(--font-libre);
 }
 
-/* Dark mode palette */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #000000;
-    --foreground: #dfdac4;
-  }
-}
-
 /* =========================
    Global defaults
    ========================= */
