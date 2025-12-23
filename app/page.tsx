@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <h1>Erol Cetinok</h1>
+      <p>Erol Cetinok</p>
       <p>My Portfolio</p>
     </>
   );
