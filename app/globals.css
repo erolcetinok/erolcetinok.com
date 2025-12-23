@@ -230,9 +230,8 @@ small,
   transform: scaleX(1);
 }
 
-/* Active page underline — thicker */
+/* Active page underline */
 .nav__link.is-active::after {
-  height: 4px;           /* ← thicker underline */
   opacity: 1;
   transform: scaleX(1);
 }
@@ -327,4 +326,8 @@ small,
 .footer-email:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.brand {
+  cursor: pointer;
 }
