@@ -7,37 +7,31 @@ const navItems = [
   { href: "/projects", label: "Projects" },
   { href: "/gallery", label: "Gallery" },
   { href: "/blog", label: "Blogs" },
-  { href: "/research", label: "research" },
+  { href: "/research", label: "Research" },
 ];
 
 export default function Header({ className }: { className?: string }) {
   return (
     <header className={`site-header ${className || ""}`}>
       <div className="site-header__inner site-header__inner--stacked">
-        {/* Brand (centered) */}
         <Link href="/" className="brand brand--stacked">
           <Image
             src="/logo.png"
             alt="Erol Cetinok logo"
-            width={44}
-            height={44}
+            width={60}
+            height={60}
             priority
           />
-
-          <div className="brand__right">
-            <span className="brand__slash">/</span>
-            <span className="brand__name">Erol Cetinok</span>
-          </div>
+          <span className="brand__name">Erol Cetinok</span>
         </Link>
 
-        {/* Nav (centered, with pipes) */}
-        <nav aria-label="Primary" className="nav nav--pipes">
-          {navItems.map((item, idx) => (
+        {/* Nav (pipes are added by CSS for perfect centering) */}
+        <nav aria-label="Primary" className="nav">
+          {navItems.map((item) => (
             <span key={item.href} className="nav__item">
               <Link href={item.href} className="nav__link">
                 {item.label}
               </Link>
-              {idx !== navItems.length - 1 && <span className="nav__pipe">|</span>}
             </span>
           ))}
         </nav>
