@@ -340,9 +340,3 @@ a {
 a:hover {
   opacity: 0.85;
 }
-
-/* Body text links only → italic */
-p a,
-li a {
-  font-style: italic;
-}
