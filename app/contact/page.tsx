@@ -51,14 +51,16 @@ export default function ContactPage() {
 
   return (
     <>
-      <h1>Contact</h1>
+      <div className="contact-intro">
+  <h1>Contact</h1>
 
-      <p>
-        If you’d like to collaborate, have questions, or just want to reach out,
-        you can email me at{" "}
-        <a href="mailto:erol.cetinok@gmail.com">erol.cetinok@gmail.com</a> or use
-        the form below.
-      </p>
+  <p>
+    If you'd like to collaborate, have questions, or just want to say hello,
+    you can email me at{" "}
+    <a href="mailto:erol.cetinok@gmail.com">erol (dot) cetinok (at) gmail (dot) com</a> or use
+    the form below.
+  </p>
+</div>
 
       <form onSubmit={onSubmit} className="contact-form">
         <div className="contact-grid">
@@ -93,7 +95,7 @@ export default function ContactPage() {
 
         {status.type === "success" && (
           <p className="contact-status contact-success">
-            Sent — I’ll get back to you soon.
+            Your message has been sent! I'll get back to you soon.
           </p>
         )}
 

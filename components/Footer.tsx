@@ -70,7 +70,7 @@ export default function Footer() {
             className="footer-line footer-line--shout footer-email"
             href="mailto:erol.cetinok@gmail.com"
           >
-            CONTACT @ erol (at) gmail (dot) com
+            CONTACT @ erol (dot) cetinok (at) gmail (dot) com
           </a>
         </div>
       </div>
