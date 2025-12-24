@@ -329,3 +329,20 @@ small,
 .brand {
   cursor: pointer;
 }
+
+/* Base link styling (applies everywhere) */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+/* Body text links only → italic */
+p a,
+li a {
+  font-style: italic;
+}
