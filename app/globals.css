@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================
-   Theme variables
-   ========================= */
-
 :root {
   --background: #dfdac4;
   --foreground: #000000;
@@ -15,7 +11,6 @@
   --border-color: color-mix(in srgb, var(--foreground) 15%, transparent);
 }
 
-/* Tailwind v4 theme bridge */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -24,9 +19,7 @@
   --font-serif: var(--font-libre);
 }
 
-/* =========================
-   Global defaults
-   ========================= */
+/* global defaults /
 
 body {
   background: var(--background);
@@ -36,7 +29,7 @@ body {
   font-family: var(--font-libre), serif;
 }
 
-/* Headings are still Libre (but more distinct via size/spacing) */
+/* headings are Libre */
 h1 {
   font-size: clamp(2.2rem, 4vw, 3rem);
   font-weight: 700;
@@ -79,9 +72,7 @@ small,
   opacity: 0.75;
 }
 
-/* =========================
-   Layout constants
-   ========================= */
+/* layout cosntants */
 
 .page {
   max-width: var(--max-width);
@@ -90,9 +81,7 @@ small,
   min-height: 70vh;
 }
 
-/* =========================
-   Header (Inter only) — stacked like reference
-   ========================= */
+/* Header is stacked */
 
 .site-header {
   border-bottom: 1px solid var(--border-color);
@@ -157,39 +146,37 @@ small,
   width: 100%;
 }
 
-/* Nav row — true centered single line */
+/* nav row */
 .nav {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  /* IMPORTANT: no wrapping = no “new line starts with separator” bias */
   flex-wrap: nowrap;
 
-  /* IMPORTANT: remove gap; spacing comes from separator margin */
   gap: 0;
 
   font-size: 20px;
 
-  /* If screen is too small, it will scroll instead of wrapping */
+  /* scroll insgead of wrap */
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Hide scrollbar (optional but nice) */
+/* hide scrollbar */
 .nav::-webkit-scrollbar {
   display: none;
 }
 
-/* Items */
+/* items */
 .nav__item {
   display: flex;
   align-items: center;
 }
 
-/* Separator between items */
+/* separator between items */
 .nav__item + .nav__item::before {
   content: "|";
   opacity: 0.55;
@@ -224,21 +211,15 @@ small,
   transform: scaleX(1);
 }
 
-/* Active page underline */
+/* active page underline */
 .nav__link.is-active::after {
   opacity: 1;
   transform: scaleX(1);
 }
 
-
-
-/* Optional: make active link slightly bolder */
 .nav__link.is-active {
   font-weight: 600;
 }
-/* =========================
-   Footer (Inter only) — stacked like reference
-   ========================= */
 
 .site-footer {
   border-top: 1px solid var(--border-color);
@@ -252,7 +233,6 @@ small,
   padding: 44px var(--page-padding);
 }
 
-/* Reuse the stacked centering idea from the header */
 .site-footer__inner--stacked {
   display: flex;
   flex-direction: column;
@@ -261,7 +241,6 @@ small,
   text-align: center;
 }
 
-/* Brand row (scaled down relative to header) */
 .footer-brand--stacked {
   display: flex;
   align-items: center;
@@ -332,11 +311,6 @@ small,
   cursor: pointer;
 }
 
-/* =========================
-   Links — global baseline
-   ========================= */
-
-/* Default: underline visible */
 a {
   color: inherit;
   text-decoration: underline;
@@ -348,18 +322,14 @@ a:hover {
   opacity: 0.85;
 }
 
-/* =========================
-   Body text links — reverse hover
-   ========================= */
 
-/* Italicize only reading-context links */
 p a,
 li a {
   position: relative;
-  text-decoration: none; /* remove default underline */
+  text-decoration: none;
 }
 
-/* Custom underline (visible by default) */
+
 p a::after,
 li a::after {
   content: "";
@@ -375,19 +345,15 @@ li a::after {
   transition: transform 180ms ease, opacity 180ms ease;
 }
 
-/* Hover → underline disappears */
+
 p a:hover::after,
 li a:hover::after {
   opacity: 0;
   transform: scaleX(0);
 }
 
-/* =========================
-   Contact form
-   ========================= */
-
 .contact-form {
-  margin: 28px auto 0; /* centers horizontally */
+  margin: 28px auto 0;
   max-width: 720px;
 }
 
@@ -406,7 +372,7 @@ li a:hover::after {
   flex-direction: column;
   gap: 8px;
 
-  /* Labels inherit body font → Libre Baskerville */
+
   font-family: var(--font-libre), serif;
 }
 
@@ -423,7 +389,7 @@ li a:hover::after {
   background: transparent;
   color: inherit;
 
-  /* Form input text = Inter */
+
   font-family: var(--font-inter), sans-serif;
   font-size: 16px;
 }
@@ -440,15 +406,15 @@ li a:hover::after {
 
   padding: 12px 20px;
 
-  /* Sharp, square button */
+
   border-radius: 0;
   border: 1px solid #000;
 
-  /* Black button */
+
   background: #000;
   color: var(--background);
 
-  /* Button text */
+
   font-family: var(--font-inter), sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -498,9 +464,6 @@ li a:hover::after {
   opacity: 0.9;
 }
 
-/* =========================
-   Contact page intro
-   ========================= */
 
 .contact-intro {
   text-align: center;
@@ -513,9 +476,6 @@ li a:hover::after {
   margin-right: auto;
 }
 
-/* =========================
-   Home hero
-   ========================= */
 
 .home-hero {
   display: grid;
@@ -556,7 +516,7 @@ li a:hover::after {
   flex-wrap: wrap;
 }
 
-/* Reusable button style */
+/* reusable button style */
 .btn {
   display: inline-block;
   padding: 14px 22px;

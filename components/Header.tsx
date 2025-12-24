@@ -19,13 +19,12 @@ export default function Header({ className }: { className?: string }) {
   return (
     <header className={`site-header ${className || ""}`}>
       <div className="site-header__inner site-header__inner--stacked">
-        {/* Brand: always go home AND scroll to top */}
+        {/* go home and scroll to top*/}
         <Link
           href="/"
           className="brand brand--stacked"
           scroll={true}
           onClick={() => {
-            // Ensures "go to top" even if already on "/"
             window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           }}
         >

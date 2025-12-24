@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner site-footer__inner--stacked">
-        {/* Brand: always go home AND scroll to top */}
+        {}
         <Link
           href="/"
           className="footer-brand footer-brand--stacked"
@@ -27,7 +27,7 @@ export default function Footer() {
           <span className="footer-brand__name">Erol Cetinok</span>
         </Link>
 
-        {/* Social icons */}
+        {/* icons of social media sights */}
         <div className="footer-links footer-links--centered">
           <a
             href="https://www.linkedin.com/in/erol-cetinok-387830348/"
@@ -60,7 +60,7 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Text lines */}
+        {/* text lines*/}
         <div className="footer-lines">
           <div className="footer-line footer-line--shout">
             Erol Cetinok © {year}
