@@ -353,7 +353,6 @@ a:hover {
 /* Italicize only reading-context links */
 p a,
 li a {
-  font-style: italic;
   position: relative;
   text-decoration: none; /* remove default underline */
 }
