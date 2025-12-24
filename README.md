@@ -11,7 +11,7 @@ Live site: **https://erolcetinok.com**
 This website serves as a central hub for:
 - Way to catalogue my projects
 - Sharing my research
-- Starting my blog (if I have the motivation 😲
+- Starting my blog (if I have the motivation 😲)
 - Contact point for collaboration
 
 ---
