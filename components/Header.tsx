@@ -43,8 +43,6 @@ export default function Header({ className }: { className?: string }) {
                   <a
                     href={item.href}
                     className="nav__link"
-                    target="_blank"
-                    rel="noreferrer"
                   >
                     {item.label}
                   </a>
