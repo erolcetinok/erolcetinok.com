@@ -3,7 +3,6 @@ export const NAV_ITEMS = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
-  { href: "/research", label: "Research" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
