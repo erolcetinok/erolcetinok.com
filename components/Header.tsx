@@ -32,14 +32,15 @@ export default function Header({ className }: { className?: string }) {
 
         <nav aria-label="Primary" className="nav">
           {NAV_ITEMS.map((item) => {
+            const isExternal = 'external' in item && item.external;
             const isActive =
               item.href === "/"
                 ? pathname === "/"
-                : !item.external && pathname.startsWith(item.href);
+                : !isExternal && pathname.startsWith(item.href);
 
             return (
               <span key={item.href} className="nav__item">
-                {item.external ? (
+                {isExternal ? (
                   <a
                     href={item.href}
                     className="nav__link"
