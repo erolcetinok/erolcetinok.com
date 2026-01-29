@@ -2,18 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { SOCIAL_LINKS } from "@/lib/constants";
-
-const year = new Date().getFullYear();
+import { usePathname } from "next/navigation";
+import { NAV_ITEMS } from "@/lib/constants";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="site-footer">
-      <div className="site-footer__inner site-footer__inner--stacked">
-        {}
+      <div className="site-footer__inner site-footer__inner--row">
         <Link
           href="/"
-          className="footer-brand footer-brand--stacked"
+          className="footer-brand"
           scroll={true}
           onClick={() => {
             window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -28,52 +28,24 @@ export default function Footer() {
           <span className="footer-brand__name">Erol Cetinok</span>
         </Link>
 
-        {/* icons of social media sights */}
-        <div className="footer-links footer-links--centered">
-          <a
-            href={SOCIAL_LINKS.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-            className="icon-link"
-          >
-            <Image src="/icons/linkedin.svg" alt="" width={26} height={26} />
-          </a>
-
-          <a
-            href={SOCIAL_LINKS.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            className="icon-link"
-          >
-            <Image src="/icons/github.svg" alt="" width={26} height={26} />
-          </a>
-
-          <a
-            href={SOCIAL_LINKS.youtube}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="YouTube"
-            className="icon-link"
-          >
-            <Image src="/icons/youtube.svg" alt="" width={26} height={26} />
-          </a>
-        </div>
-
-        {/* text lines*/}
-        <div className="footer-lines">
-          <div className="footer-line footer-line--shout">
-            Erol Cetinok © {year}
-          </div>
-
-          <a
-            className="footer-line footer-line--shout footer-email"
-            href={`mailto:${SOCIAL_LINKS.email}`}
-          >
-            CONTACT @ erol (dot) cetinok (at) gmail (dot) com
-          </a>
-        </div>
+        <nav aria-label="Footer" className="footer-nav">
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+            return (
+              <span key={item.href} className="footer-nav__item">
+                <Link
+                  href={item.href}
+                  className={`footer-nav__link ${isActive ? "is-active" : ""}`}
+                >
+                  {item.label}
+                </Link>
+              </span>
+            );
+          })}
+        </nav>
       </div>
     </footer>
   );
