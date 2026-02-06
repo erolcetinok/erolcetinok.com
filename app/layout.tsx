@@ -1,20 +1,13 @@
 import "./globals.css";
 
-import { Inter } from "next/font/google";
-import { Libre_Baskerville } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const inter = Inter({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const libreBaskerville = Libre_Baskerville({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-libre",
+  variable: "--font-mono",
 });
 
 export default function RootLayout({
@@ -24,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${libreBaskerville.variable}`}>
+      <body className={`${jetbrainsMono.variable} antialiased`}>
         <Header />
         <main className="page">{children}</main>
         <Footer />

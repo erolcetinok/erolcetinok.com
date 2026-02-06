@@ -2,15 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { NAV_ITEMS } from "@/lib/constants";
+import { FOOTER_LINKS } from "@/lib/constants";
 
 export default function Footer() {
-  const pathname = usePathname();
-
   return (
     <footer className="site-footer">
-      <div className="site-footer__inner site-footer__inner--row">
+      <div className="site-footer__inner site-footer__inner--single">
         <Link
           href="/"
           className="footer-brand"
@@ -22,24 +19,32 @@ export default function Footer() {
           <Image
             src="/icons/logo.png"
             alt="Erol Cetinok logo"
-            width={42}
-            height={42}
+            width={36}
+            height={36}
           />
           <span className="footer-brand__name">Erol Cetinok</span>
         </Link>
 
-        <nav aria-label="Footer" className="footer-nav">
-          {NAV_ITEMS.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
+        <nav aria-label="Footer links" className="footer-links-text">
+          {FOOTER_LINKS.map((item) => {
+            const isExternal = item.href.startsWith("http") || item.href.endsWith(".pdf");
+            if (isExternal) {
+              return (
+                <span key={item.href} className="footer-links-text__item">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="footer-links-text__link"
+                  >
+                    {item.label}
+                  </a>
+                </span>
+              );
+            }
             return (
-              <span key={item.href} className="footer-nav__item">
-                <Link
-                  href={item.href}
-                  className={`footer-nav__link ${isActive ? "is-active" : ""}`}
-                >
+              <span key={item.href} className="footer-links-text__item">
+                <Link href={item.href} className="footer-links-text__link">
                   {item.label}
                 </Link>
               </span>
