@@ -38,10 +38,7 @@ export default function Header({ className }: { className?: string }) {
         <Link
           href="/"
           className="brand"
-          scroll={true}
-          onClick={() => {
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-          }}
+          onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         >
           <Image
             src="/icons/logo.png"
@@ -74,7 +71,7 @@ export default function Header({ className }: { className?: string }) {
           </nav>
 
           {OVERFLOW_NAV_ITEMS.length > 0 && (
-            <div style={{ position: "relative" }}>
+            <div className="hamburger-wrap">
               <button
                 ref={buttonRef}
                 type="button"

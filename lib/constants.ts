@@ -1,11 +1,3 @@
-export const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  // { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-] as const;
-
 /** Shown in header: Home, Projects, Contact */
 export const HEADER_NAV_ITEMS = [
   { href: "/", label: "Home" },
@@ -33,4 +25,3 @@ export const SOCIAL_LINKS = {
   youtube: "https://www.youtube.com/@ErolBuilds",
   email: "erol.cetinok@gmail.com",
 } as const;
-

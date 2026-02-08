@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { FOOTER_LINKS } from "@/lib/constants";
 
 export default function Footer() {
@@ -11,10 +11,7 @@ export default function Footer() {
         <Link
           href="/"
           className="footer-brand"
-          scroll={true}
-          onClick={() => {
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-          }}
+          onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         >
           <Image
             src="/icons/logo.png"
