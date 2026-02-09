@@ -1,14 +1,10 @@
-/** Shown in header: Home, Projects, Contact */
-export const HEADER_NAV_ITEMS = [
+/** Full-screen overlay menu: Home, Projects, Writing, Media, Contact */
+export const MENU_NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
+  { href: "/blog", label: "Writing" },
+  { href: "/media", label: "Media" },
   { href: "/contact", label: "Contact" },
-] as const;
-
-/** Shown in hamburger menu: other pages */
-export const OVERFLOW_NAV_ITEMS = [
-  { href: "/about", label: "About" },
-  // { href: "/blog", label: "Blog" },
 ] as const;
 
 /** Footer text links (Andrew Yuan style) */
