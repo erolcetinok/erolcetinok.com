@@ -59,10 +59,10 @@ export default function Header({ className }: { className?: string }) {
         <div className="site-header__inner site-header__inner--three">
           <button
             type="button"
-            className="header-icon-btn"
-            aria-label="Open menu"
+            className={`header-icon-btn header-icon-btn--menu ${menuOpen ? "is-menu-open" : ""}`}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setMenuOpen((prev) => !prev)}
           >
             <span className="hamburger-line" />
             <span className="hamburger-line" />
@@ -109,7 +109,14 @@ export default function Header({ className }: { className?: string }) {
               aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               onClick={toggleTheme}
             >
-              {resolvedTheme === "dark" ? <MoonIcon /> : <SunIcon />}
+              <span className="theme-toggle-icons" aria-hidden>
+                <span className="theme-toggle-icon theme-toggle-icon--sun">
+                  <SunIcon />
+                </span>
+                <span className="theme-toggle-icon theme-toggle-icon--moon">
+                  <MoonIcon />
+                </span>
+              </span>
             </button>
           ) : (
             <span className="header-icon-btn" aria-hidden style={{ width: 44, height: 44 }} />
@@ -125,15 +132,6 @@ export default function Header({ className }: { className?: string }) {
           aria-label="Navigation menu"
         >
           <div className="menu-overlay__inner">
-            <button
-              type="button"
-              className="menu-overlay__close"
-              aria-label="Close menu"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span aria-hidden>×</span>
-            </button>
-
             <nav className="menu-overlay__nav">
               {MENU_NAV_ITEMS.map((item) => {
                 const isActive =
