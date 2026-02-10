@@ -840,69 +840,6 @@ li a:hover::after {
   opacity: 0.85;
 }
 
-/* Scroll footer: timestamp left, scroll-to-top arrow right; only visible after scrolling */
-.scroll-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
-  background: var(--background);
-  font-family: var(--font-sans);
-  transition: background-color 0.55s ease-out, color 0.55s ease-out,
-    opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.scroll-footer--visible {
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.scroll-footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 12px var(--page-padding);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.scroll-footer__time {
-  font-size: 0.85rem;
-  color: var(--text-color-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
-.scroll-footer__to-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: var(--text-color-primary);
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.15s ease, opacity 0.15s ease;
-}
-
-.scroll-footer__to-top:hover {
-  background: color-mix(in srgb, var(--foreground) 8%, transparent);
-  opacity: 0.9;
-}
-
-.scroll-footer__to-top:focus-visible {
-  outline: 2px solid var(--foreground);
-  outline-offset: 2px;
-}
-
 /* Mobile */
 @media (max-width: 900px) {
   .site-footer__inner--single {

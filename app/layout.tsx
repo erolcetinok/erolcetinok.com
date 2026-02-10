@@ -1,7 +1,6 @@
 import "./globals.css";
 
 import Header from "@/components/Header";
-import ScrollFooter from "@/components/ScrollFooter";
 import { Providers } from "@/components/providers";
 
 export default function RootLayout({
@@ -15,7 +14,6 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main className="page">{children}</main>
-          <ScrollFooter />
         </Providers>
       </body>
     </html>
