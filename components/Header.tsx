@@ -124,7 +124,7 @@ export default function Header({ className }: { className?: string }) {
             )}
             {!isHome && currentNavItem && (
               <>
-                <span className="header-center__divider" aria-hidden>·</span>
+                <span className="header-center__divider" aria-hidden>/</span>
                 <span className="header-center__section">{currentNavItem.label}</span>
               </>
             )}

@@ -32,6 +32,7 @@
 
   --max-width: 36rem;
   --page-padding: 1rem;
+  --radius-bevel: 8px;
 
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -223,7 +224,7 @@ small,
 /* briOS-style: center = logo on home, name + current section off home */
 .header-center {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: 0.35rem;
   flex-wrap: wrap;
@@ -233,6 +234,7 @@ small,
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 1.125rem;
+  line-height: 1;
   text-decoration: none;
   color: var(--text-color-primary);
 }
@@ -244,11 +246,15 @@ small,
 .header-center__divider {
   color: var(--text-color-tertiary);
   font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1;
 }
 
 .header-center__section {
   color: var(--text-color-secondary);
-  font-size: 1rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .header-icon-btn {
@@ -424,14 +430,17 @@ html.dark .theme-toggle-icon--moon {
   font-size: 1.375rem;
   font-weight: 700;
   text-decoration: none;
-  color: inherit;
+  /* Default: prominent (white in dark, dark in light) */
+  color: var(--text-color-primary);
   white-space: nowrap;
   letter-spacing: 0.02em;
+  transition: color 0.15s ease;
 }
 
 .menu-overlay__link:hover,
 .menu-overlay__link.is-active {
-  opacity: 0.85;
+  /* Hover/selected: muted gray in both themes */
+  color: var(--text-color-secondary);
 }
 
 .menu-overlay__social {
@@ -450,7 +459,7 @@ html.dark .theme-toggle-icon--moon {
   height: 44px;
   color: var(--social-icon-color);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: var(--radius-bevel);
   transition: color 0.15s ease, opacity 0.15s ease;
 }
 
@@ -700,8 +709,7 @@ li a:hover::after {
   flex-shrink: 0;
   width: 160px;
   height: 160px;
-  border: 3px solid var(--foreground);
-  border-radius: 4px;
+  border-radius: var(--radius-bevel);
   overflow: hidden;
   background: var(--background);
 }
