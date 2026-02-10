@@ -14,7 +14,7 @@
   --color-neutral-700: #404040;
   --color-neutral-800: #262626;
   --color-neutral-900: #171717;
-  --color-neutral-950: #0a0a0a;
+  --color-neutral-950: #000000;
 
   --text-color-primary: var(--color-neutral-900);
   --text-color-secondary: var(--color-neutral-600);
@@ -44,8 +44,8 @@ html.dark {
   --text-color-primary: rgba(255, 255, 255, 0.9);
   --text-color-secondary: rgba(255, 255, 255, 0.7);
   --text-color-tertiary: rgba(255, 255, 255, 0.5);
-  --background-color-main: var(--color-neutral-950);
-  --background-color-primary: var(--color-neutral-950);
+  --background-color-main: #000000;
+  --background-color-primary: #000000;
   --border-color-primary: rgba(255, 255, 255, 0.12);
   --border-color-secondary: rgba(255, 255, 255, 0.09);
   --link-color: #60a5fa;
