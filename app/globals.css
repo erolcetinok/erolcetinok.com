@@ -117,6 +117,11 @@ body {
   color: var(--selection-text);
 }
 
+/* Prevent selection on all images; right-click still works */
+img {
+  user-select: none;
+}
+
 /* Typography */
 h1, h2, h3 {
   color: var(--text-color-primary);

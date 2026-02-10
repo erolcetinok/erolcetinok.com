@@ -102,7 +102,10 @@ export default function Header({ className }: { className?: string }) {
               <Link
                 href="/"
                 className="header-logo"
-                onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+                onClick={() => {
+                  setMenuOpen(false);
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }}
                 aria-label="Erol Cetinok – Home"
               >
                 <Image
