@@ -424,6 +424,11 @@ html.dark .theme-toggle-icon--moon {
   box-sizing: border-box;
 }
 
+/* Higher specificity so font-size wins over Tailwind base / inheritance */
+.menu-overlay .menu-overlay__nav .menu-overlay__link {
+  font-size: 1.375rem;
+}
+
 .menu-overlay__link {
   display: block;
   padding: 0;
@@ -439,13 +444,13 @@ html.dark .theme-toggle-icon--moon {
 
 .menu-overlay__link:hover,
 .menu-overlay__link.is-active {
-  /* Hover/selected: muted gray in both themes */
+  /* Hover/selected:  muted gray in both themes */
   color: var(--text-color-secondary);
 }
 
 .menu-overlay__social {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
   margin-top: 1.5rem;
   /* Align left edge of first icon with nav text (icon is 24px centered in 44px link) */
   margin-left: -10px;
