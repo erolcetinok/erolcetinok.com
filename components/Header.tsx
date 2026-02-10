@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 import { MENU_NAV_ITEMS } from "@/lib/constants";
+
 
 function SunIcon() {
   return (
@@ -46,7 +48,33 @@ export default function Header({ className }: { className?: string }) {
     };
   }, [menuOpen]);
 
-  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  const toggleTheme = useCallback(() => {
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+    const reducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      setTheme(nextTheme);
+      return;
+    }
+
+    if (
+      typeof document !== "undefined" &&
+      "startViewTransition" in document
+    ) {
+      const transition = (document as Document & { startViewTransition?: (cb: () => void) => void }).startViewTransition?.(
+        () => {
+          flushSync(() => setTheme(nextTheme));
+        }
+      );
+      if (!transition) {
+        setTheme(nextTheme);
+      }
+    } else {
+      setTheme(nextTheme);
+    }
+  }, [resolvedTheme, setTheme]);
 
   const isHome = pathname === "/";
   const currentNavItem = MENU_NAV_ITEMS.find((item) =>
@@ -179,9 +207,26 @@ export default function Header({ className }: { className?: string }) {
                 aria-label="Email"
                 className="menu-overlay__social-link"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <rect width="20" height="16" x="2" y="4" rx="2" />
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <rect x="1" y="1" width="34" height="34" rx="4" />
+                  <g transform="translate(6, 6)">
+                    <rect width="20" height="16" x="2" y="4" rx="2" strokeWidth="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" strokeWidth="2" />
+                  </g>
+                </svg>
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Resume"
+                className="menu-overlay__social-link"
+              >
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <rect x="1" y="1" width="34" height="34" rx="4" />
+                  <g transform="translate(6, 6)">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" strokeWidth="2" />
+                  </g>
                 </svg>
               </a>
             </div>

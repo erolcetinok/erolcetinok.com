@@ -34,6 +34,9 @@
   --page-padding: 1rem;
 
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Social icons: muted gray by default, match primary text on hover */
+  --social-icon-color: var(--color-neutral-500);
 }
 
 html.dark {
@@ -50,12 +53,31 @@ html.dark {
   --background: var(--background-color-main);
   --foreground: var(--text-color-primary);
   --border-color: var(--border-color-primary);
+
+  /* Social icons: muted on dark bg */
+  --social-icon-color: rgba(255, 255, 255, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* View Transitions API: full-screen gradient-style fade for theme toggle */
+@keyframes theme-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+::view-transition-old(root) {
+  animation: theme-fade-out 0.4s ease-out forwards;
+}
+::view-transition-new(root) {
+  animation: theme-fade-in 0.4s ease-out forwards;
 }
 
 /* global defaults – barebones briOS-style */
@@ -76,6 +98,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   font-synthesis: none;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
 ::selection {
@@ -143,6 +166,7 @@ small,
   margin: 0 auto;
   padding: var(--page-padding);
   min-height: 70vh;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
 @media (min-width: 768px) {
@@ -160,6 +184,7 @@ small,
   background: var(--background);
   font-family: var(--font-sans);
   width: 100%;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
 /* When menu overlay is open, keep header on top so the X stays clickable */
@@ -237,7 +262,7 @@ small,
   background: transparent;
   color: inherit;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 
 .header-icon-btn:hover {
@@ -266,25 +291,26 @@ small,
 
 /* Hamburger: three lines (shown on first button) */
 /* Menu button: hamburger ↔ X morph (same position) */
+/* Hamburger: match logo – thick blocky lines, sharp corners, spacing ≈ line thickness */
 .header-icon-btn--menu {
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 3px;
 }
 
 .header-icon-btn--menu .hamburger-line {
   display: block;
   width: 20px;
-  height: 2px;
+  height: 3px;
   background: currentColor;
-  border-radius: 1px;
+  border-radius: 0;
   transition: transform 0.25s ease, opacity 0.2s ease;
   transform-origin: center;
 }
 
 /* X state: top and bottom bars form the X, middle fades out */
 .header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(9px) rotate(45deg);
 }
 
 .header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(2) {
@@ -292,7 +318,7 @@ small,
 }
 
 .header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 .header-icon-btn:first-child svg {
@@ -364,6 +390,7 @@ html.dark .theme-toggle-icon--moon {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   animation: menu-overlay-in 0.2s ease-out;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
 .menu-overlay__inner {
@@ -382,7 +409,6 @@ html.dark .theme-toggle-icon--moon {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: 1;
   width: 100%;
   align-items: flex-start;
 }
@@ -411,10 +437,10 @@ html.dark .theme-toggle-icon--moon {
 
 .menu-overlay__social {
   display: flex;
-  gap: 20px;
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
+  gap: 12px;
+  margin-top: 1.5rem;
+  /* Align left edge of first icon with nav text (icon is 24px centered in 44px link) */
+  margin-left: -10px;
 }
 
 .menu-overlay__social-link {
@@ -423,14 +449,15 @@ html.dark .theme-toggle-icon--moon {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--text-color-secondary);
+  color: var(--social-icon-color);
   text-decoration: none;
   border-radius: 8px;
+  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 .menu-overlay__social-link:hover {
-  background: color-mix(in srgb, var(--foreground) 10%, transparent);
-  color: var(--text-color-primary);
+  color: var(--foreground);
+  opacity: 0.9;
 }
 
 /* Footer: name left, text links right (Andrew Yuan style). Visible when you scroll to bottom. */
@@ -438,6 +465,7 @@ html.dark .theme-toggle-icon--moon {
 .site-footer {
   background: var(--background);
   font-family: var(--font-sans);
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
 .site-footer__inner {
@@ -714,7 +742,6 @@ li a:hover::after {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
 }
 
 @media (min-width: 520px) {
@@ -754,12 +781,12 @@ li a:hover::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color-secondary);
+  color: var(--social-icon-color);
   transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 .home-hero__social-link:hover {
-  color: var(--text-color-primary);
+  color: var(--foreground);
   opacity: 0.9;
 }
 

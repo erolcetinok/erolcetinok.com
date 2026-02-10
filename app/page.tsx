@@ -22,7 +22,7 @@ export default function Home() {
           <span className="home-hero__name-line">Cetinok</span>
         </h1>
         <p className="home-hero__tagline">
-          Aspiring engineer & roboticist
+          I'm an aspiring mechanical engineer & roboticist
         </p>
         <div className="home-hero__social">
           <a
@@ -52,50 +52,33 @@ export default function Home() {
             aria-label="Email"
             className="home-hero__social-link"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect width="20" height="16" x="2" y="4" rx="2" />
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="1" y="1" width="34" height="34" rx="4" />
+              <g transform="translate(6, 6)">
+                <rect width="20" height="16" x="2" y="4" rx="2" strokeWidth="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" strokeWidth="2" />
+              </g>
+            </svg>
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Resume"
+            className="home-hero__social-link"
+          >
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="1" y="1" width="34" height="34" rx="4" />
+              <g transform="translate(6, 6)">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" strokeWidth="2" />
+              </g>
             </svg>
           </a>
         </div>
       </div>
     </section>
 
-    {/* Space-filling content to test sticky header */}
-    <section className="home-filler" aria-hidden>
-      <h2>Section one</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </section>
-    <section className="home-filler" aria-hidden>
-      <h2>Section two</h2>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </section>
-    <section className="home-filler" aria-hidden>
-      <h2>Section three</h2>
-      <p>
-        Curabitur pretium tincidunt lacus. Nulla facilisi. Ut fringilla. Fusce
-        aliquet magna a neque. Nullam ut nisi a odio semper cursus. Integer
-        mollis. Integer tincidunt aliquam nibh.
-      </p>
-    </section>
-    <section className="home-filler" aria-hidden>
-      <h2>Section four</h2>
-      <p>
-        Pellentesque habitant morbi tristique senectus et netus et malesuada
-        fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
-        eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-        semper.
-      </p>
-    </section>
+   
   </>
   );
 }
