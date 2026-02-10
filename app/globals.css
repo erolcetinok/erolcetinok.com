@@ -30,7 +30,7 @@
   --foreground: var(--text-color-primary);
   --border-color: var(--border-color-primary);
 
-  --max-width: 36rem;
+  --max-width: 40rem;
   --page-padding: 1rem;
   --radius-bevel: 8px;
 
@@ -450,18 +450,25 @@ html.dark .theme-toggle-icon--moon {
 
 .menu-overlay__social {
   display: flex;
-  gap: 1rem;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
   margin-top: 1.5rem;
-  /* Align left edge of first icon with nav text (icon is 24px centered in 44px link) */
-  margin-left: -10px;
+  /* Align first icon left with nav text (36px box, 24px icon → 6px padding) */
+  margin-left: -6px;
+}
+
+/* Higher specificity so gap isn’t overridden; match home hero icon spacing */
+.menu-overlay .menu-overlay__inner .menu-overlay__social {
+  gap: 0.75rem !important;
 }
 
 .menu-overlay__social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
   color: var(--social-icon-color);
   text-decoration: none;
   border-radius: var(--radius-bevel);
@@ -471,6 +478,12 @@ html.dark .theme-toggle-icon--moon {
 .menu-overlay__social-link:hover {
   color: var(--foreground);
   opacity: 0.9;
+}
+
+.menu-overlay__social-link svg {
+  display: block;
+  width: 28px;
+  height: 28px;
 }
 
 /* Footer: name left, text links right (Andrew Yuan style). Visible when you scroll to bottom. */
