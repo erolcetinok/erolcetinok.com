@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
-import { MENU_NAV_ITEMS } from "@/lib/constants";
+import { MENU_NAV_ITEMS, SOCIAL_LINKS } from "@/lib/constants";
 
 
 function SunIcon() {
@@ -181,7 +181,7 @@ export default function Header({ className }: { className?: string }) {
 
             <div className="menu-overlay__social">
               <a
-                href="https://www.linkedin.com/in/erol-cetinok-387830348/"
+                href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
@@ -192,7 +192,7 @@ export default function Header({ className }: { className?: string }) {
                 </svg>
               </a>
               <a
-                href="https://github.com/erolcetinok"
+                href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
@@ -203,7 +203,7 @@ export default function Header({ className }: { className?: string }) {
                 </svg>
               </a>
               <a
-                href="mailto:erol.cetinok@gmail.com"
+                href={`mailto:${SOCIAL_LINKS.email}`}
                 aria-label="Email"
                 className="menu-overlay__social-link"
               >
@@ -216,7 +216,7 @@ export default function Header({ className }: { className?: string }) {
                 </svg>
               </a>
               <a
-                href="/resume.pdf"
+                href={SOCIAL_LINKS.resume}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Resume"

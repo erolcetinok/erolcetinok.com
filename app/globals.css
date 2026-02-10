@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* briOS-inspired: neutral palette + typography */
+/* ==========================================================================
+   Design tokens & theme
+   ========================================================================== */
+
 :root {
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
@@ -35,9 +38,11 @@
   --radius-bevel: 8px;
 
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  /* Social icons: muted gray by default, match primary text on hover */
   --social-icon-color: var(--color-neutral-500);
+
+  /* Text selection (light mode: dark highlight, light text – opposite of dark mode) */
+  --selection-bg: #2e362f;
+  --selection-text: #babbc5;
 }
 
 html.dark {
@@ -54,9 +59,11 @@ html.dark {
   --background: var(--background-color-main);
   --foreground: var(--text-color-primary);
   --border-color: var(--border-color-primary);
-
-  /* Social icons: muted on dark bg */
   --social-icon-color: rgba(255, 255, 255, 0.45);
+
+  /* Text selection (dark mode: light highlight, dark text) */
+  --selection-bg: #babbc5;
+  --selection-text: #2e362f;
 }
 
 @theme inline {
@@ -65,7 +72,7 @@ html.dark {
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* View Transitions API: full-screen gradient-style fade for theme toggle */
+/* Theme toggle: View Transitions API */
 @keyframes theme-fade-out {
   from { opacity: 1; }
   to { opacity: 0; }
@@ -81,7 +88,9 @@ html.dark {
   animation: theme-fade-in 0.4s ease-out forwards;
 }
 
-/* global defaults – barebones briOS-style */
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 * {
   -webkit-tap-highlight-color: transparent;
@@ -102,17 +111,13 @@ body {
   transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
+/* Text selection uses --selection-bg and --selection-text from Design tokens above. */
 ::selection {
-  background-color: rgba(0, 102, 204, 0.15);
-  color: var(--foreground);
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
 }
 
-html.dark ::selection {
-  background-color: rgba(96, 165, 250, 0.2);
-  color: var(--foreground);
-}
-
-/* headings – primary color */
+/* Typography */
 h1, h2, h3 {
   color: var(--text-color-primary);
 }
@@ -160,7 +165,9 @@ small,
   opacity: 0.75;
 }
 
-/* layout constants */
+/* ==========================================================================
+   Layout
+   ========================================================================== */
 
 .page {
   max-width: var(--max-width);
@@ -176,7 +183,9 @@ small,
   }
 }
 
-/* Header: hamburger left | logo center | theme toggle right (full-width bar) */
+/* ==========================================================================
+   Header
+   ========================================================================== */
 
 .site-header {
   position: sticky;
@@ -188,7 +197,6 @@ small,
   transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
 }
 
-/* When menu overlay is open, keep header on top so the X stays clickable */
 .site-header--menu-open {
   z-index: 10000;
 }
@@ -221,7 +229,6 @@ small,
   justify-self: end;
 }
 
-/* briOS-style: center = logo on home, name + current section off home */
 .header-center {
   display: flex;
   align-items: baseline;
@@ -295,8 +302,6 @@ small,
   object-fit: contain;
 }
 
-/* Hamburger: three lines (shown on first button) */
-/* Menu button: hamburger ↔ X morph (same position) */
 .header-icon-btn--menu {
   flex-direction: column;
   justify-content: center;
@@ -313,7 +318,6 @@ small,
   transform-origin: center;
 }
 
-/* X state: top and bottom bars form the X, middle fades out */
 .header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -330,7 +334,6 @@ small,
   display: none;
 }
 
-/* Theme toggle: sun ↔ moon crossfade + rotation */
 .theme-toggle-icons {
   position: relative;
   display: block;
@@ -367,7 +370,9 @@ html.dark .theme-toggle-icon--moon {
   transform: rotate(0deg);
 }
 
-/* Full-screen overlay menu (briOS-style: covers content + fade-in) */
+/* ==========================================================================
+   Menu overlay
+   ========================================================================== */
 
 @keyframes menu-overlay-in {
   from { opacity: 0; }
@@ -424,7 +429,6 @@ html.dark .theme-toggle-icon--moon {
   box-sizing: border-box;
 }
 
-/* Higher specificity so font-size wins over Tailwind base / inheritance */
 .menu-overlay .menu-overlay__nav .menu-overlay__link {
   font-size: 1.375rem;
 }
@@ -435,7 +439,6 @@ html.dark .theme-toggle-icon--moon {
   font-size: 1.375rem;
   font-weight: 700;
   text-decoration: none;
-  /* Default: prominent (white in dark, dark in light) */
   color: var(--text-color-primary);
   white-space: nowrap;
   letter-spacing: 0.02em;
@@ -444,7 +447,6 @@ html.dark .theme-toggle-icon--moon {
 
 .menu-overlay__link:hover,
 .menu-overlay__link.is-active {
-  /* Hover/selected:  muted gray in both themes */
   color: var(--text-color-secondary);
 }
 
@@ -453,11 +455,9 @@ html.dark .theme-toggle-icon--moon {
   flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 1.5rem;
-  /* Align first icon left with nav text (36px box, 24px icon → 6px padding) */
   margin-left: -6px;
 }
 
-/* Higher specificity so gap isn’t overridden; match home hero icon spacing */
 .menu-overlay .menu-overlay__inner .menu-overlay__social {
   gap: 0.75rem !important;
 }
@@ -486,7 +486,9 @@ html.dark .theme-toggle-icon--moon {
   height: 28px;
 }
 
-/* Footer: name left, text links right (Andrew Yuan style). Visible when you scroll to bottom. */
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 
 .site-footer {
   background: var(--background);
@@ -526,7 +528,6 @@ html.dark .theme-toggle-icon--moon {
   line-height: 1;
 }
 
-/* Footer text links: LinkedIn | GitHub | Curriculum Vitae | Contact */
 .footer-links-text {
   display: flex;
   align-items: center;
@@ -554,6 +555,10 @@ html.dark .theme-toggle-icon--moon {
 .footer-links-text__link:hover {
   opacity: 0.85;
 }
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
 
 a {
   color: var(--link-color);
@@ -596,7 +601,6 @@ li a:hover::after {
   transform: scaleX(0);
 }
 
-/* briOS-style: in-content link (underline with tertiary color) */
 .link-body {
   color: inherit;
   text-decoration: underline;
@@ -608,6 +612,10 @@ li a:hover::after {
   color: var(--text-color-primary);
   text-decoration-color: currentColor;
 }
+
+/* ==========================================================================
+   Contact form
+   ========================================================================== */
 
 .contact-form {
   margin: 28px auto 0;
@@ -703,7 +711,10 @@ li a:hover::after {
   margin-right: auto;
 }
 
-/* Intro hero: photo left, name + tagline + social links right */
+/* ==========================================================================
+   Home hero
+   ========================================================================== */
+
 .home-hero {
   display: flex;
   flex-direction: column;
@@ -821,7 +832,10 @@ li a:hover::after {
   height: 28px;
 }
 
-/* Button */
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
 .btn {
   display: inline-block;
   padding: 14px 22px;
@@ -840,7 +854,10 @@ li a:hover::after {
   opacity: 0.85;
 }
 
-/* Mobile */
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
 @media (max-width: 900px) {
   .site-footer__inner--single {
     flex-direction: column;

@@ -29,7 +29,6 @@ export async function POST(req: Request) {
     const resend = new Resend(apiKey);
 
     await resend.emails.send({
-      // still need to verify erolcetinok.com in Resend and use contact@erolcetinok.com
       from: "Erol Cetinok <onboarding@resend.dev>",
       to,
       replyTo: email,
