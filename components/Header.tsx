@@ -174,7 +174,6 @@ export default function Header({ className }: { className?: string }) {
                     key={item.href}
                     href={item.href}
                     className={`menu-overlay__link ${isActive ? "is-active" : ""}`}
-                    onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
                   </Link>

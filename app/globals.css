@@ -33,7 +33,7 @@
   --foreground: var(--text-color-primary);
   --border-color: var(--border-color-primary);
 
-  --max-width: 40rem;
+  --max-width: 44rem;
   --page-padding: 1rem;
   --radius-bevel: 8px;
 
@@ -835,6 +835,181 @@ li a:hover::after {
   display: block;
   width: 28px;
   height: 28px;
+}
+
+/* ==========================================================================
+   Projects page
+   ========================================================================== */
+
+.projects-page {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.projects-header {
+  margin-bottom: 2.5rem;
+}
+
+.projects-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-color-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+.projects-intro {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-color-secondary);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.projects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.projects-list li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.projects-list li:first-child .project-card {
+  border-radius: var(--radius-bevel) var(--radius-bevel) 0 0;
+}
+
+.projects-list li:last-child {
+  border-bottom: none;
+}
+
+.projects-list li:last-child .project-card {
+  border-radius: 0 0 var(--radius-bevel) var(--radius-bevel);
+}
+
+.projects-list li:only-child .project-card {
+  border-radius: var(--radius-bevel);
+}
+
+.project-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 1.25rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--background);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.project-card:hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+}
+
+.project-card:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--foreground);
+}
+
+.project-card__title {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.project-card__description {
+  font-size: 0.9375rem;
+  color: var(--text-color-secondary);
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+@media (min-width: 520px) {
+  .project-card__description {
+    flex: 1 1 auto;
+    order: 0;
+  }
+}
+
+.project-card__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-color-tertiary);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.project-card:hover .project-card__arrow {
+  color: var(--text-color-primary);
+  transform: translateX(4px);
+}
+
+.project-card__arrow svg {
+  display: block;
+}
+
+/* Project detail page */
+.project-detail {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.project-detail__back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.project-detail__header {
+  margin-bottom: 2rem;
+}
+
+.project-detail__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-color-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.project-detail__description {
+  font-size: 1.0625rem;
+  color: var(--text-color-secondary);
+  margin: 0;
+}
+
+.project-detail__content {
+  margin-top: 2rem;
+}
+
+.project-detail__placeholder {
+  font-size: 0.9375rem;
+  color: var(--text-color-tertiary);
+  font-style: italic;
+  margin: 0;
 }
 
 /* ==========================================================================
