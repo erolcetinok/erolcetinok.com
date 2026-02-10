@@ -78,7 +78,41 @@ export default function Home() {
       </div>
     </section>
 
-   
+    {/* Space-filling content to test sticky header */}
+    <section className="home-filler" aria-hidden>
+      <h2>Section one</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
+    </section>
+    <section className="home-filler" aria-hidden>
+      <h2>Section two</h2>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </section>
+    <section className="home-filler" aria-hidden>
+      <h2>Section three</h2>
+      <p>
+        Curabitur pretium tincidunt lacus. Nulla facilisi. Ut fringilla. Fusce
+        aliquet magna a neque. Nullam ut nisi a odio semper cursus. Integer
+        mollis. Integer tincidunt aliquam nibh.
+      </p>
+    </section>
+    <section className="home-filler" aria-hidden>
+      <h2>Section four</h2>
+      <p>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada
+        fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
+        eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+        semper.
+      </p>
+    </section>
   </>
   );
 }
