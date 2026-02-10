@@ -196,7 +196,7 @@ small,
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 20px var(--page-padding);
+  padding: 12px var(--page-padding);
   box-sizing: border-box;
 }
 
@@ -205,7 +205,7 @@ small,
   grid-template-columns: 1fr minmax(0, auto) 1fr;
   align-items: center;
   justify-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .site-header__inner--three > .header-icon-btn:first-child {
@@ -255,8 +255,8 @@ small,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: none;
   background: transparent;
@@ -284,8 +284,8 @@ small,
 
 .header-logo img {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
 }
 
@@ -338,7 +338,7 @@ small,
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.25s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, transform 0.55s ease;
 }
 
 .theme-toggle-icon--sun {
@@ -758,7 +758,7 @@ li a:hover::after {
   font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 400;
-  color: var(--secondary);
+  color: var(--text-color-secondary);
   line-height: 1.4;
 }
 
@@ -793,24 +793,6 @@ li a:hover::after {
   display: block;
   width: 28px;
   height: 28px;
-}
-
-/* Filler sections (for testing sticky header) */
-.home-filler {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 4rem var(--page-padding);
-}
-
-.home-filler h2 {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
-}
-
-.home-filler p {
-  color: var(--secondary);
-  line-height: 1.6;
 }
 
 /* Button */

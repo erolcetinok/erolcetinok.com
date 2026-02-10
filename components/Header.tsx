@@ -108,8 +108,8 @@ export default function Header({ className }: { className?: string }) {
                 <Image
                   src="/icons/logo.png"
                   alt=""
-                  width={44}
-                  height={44}
+                  width={36}
+                  height={36}
                   priority
                 />
               </Link>
@@ -147,7 +147,7 @@ export default function Header({ className }: { className?: string }) {
               </span>
             </button>
           ) : (
-            <span className="header-icon-btn" aria-hidden style={{ width: 44, height: 44 }} />
+            <span className="header-icon-btn" aria-hidden style={{ width: 40, height: 40 }} />
           )}
         </div>
       </header>
