@@ -55,7 +55,7 @@ export default function ContactPage() {
       <div className="contact-intro">
         <h1>Contact</h1>
         <p>
-          If you'd like to collaborate, have questions, or just want to say hello,
+          If you&apos;d like to collaborate, have questions, or just want to say hello,
           you can email me at{" "}
           <a href={`mailto:${SOCIAL_LINKS.email}`}>erol (dot) cetinok (at) gmail (dot) com</a> or use
           the form below.
@@ -95,7 +95,7 @@ export default function ContactPage() {
 
         {status.type === "success" && (
           <p className="contact-status contact-success">
-            Your message has been sent! I'll get back to you soon.
+            Your message has been sent! I&apos;ll get back to you soon.
           </p>
         )}
 

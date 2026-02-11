@@ -8,7 +8,6 @@ import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 import { MENU_NAV_ITEMS, SOCIAL_LINKS } from "@/lib/constants";
 
-
 function SunIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -33,11 +32,11 @@ export default function Header({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
   }, []);
 
   useEffect(() => {
-    setMenuOpen(false);
+    queueMicrotask(() => setMenuOpen(false));
   }, [pathname]);
 
   useEffect(() => {

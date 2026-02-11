@@ -1,7 +1,8 @@
-export default function Blogs() {
+export default function BlogPage() {
   return (
-    <>
-      <h2>Blogs</h2>
-    </>
+    <section>
+      <h1>Writing</h1>
+      <p>Posts and articles coming soon.</p>
+    </section>
   );
 }

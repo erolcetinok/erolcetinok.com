@@ -18,11 +18,11 @@ export type Project = {
 
 export const PROJECTS: readonly Project[] = [
   {
-    slug: "Test",
-    title: "Test Project: Robotic Arm",
-    description: "Test Project: Robotic Arm",
-    year: "2026",
-    tags: ["Test", "Robotics", "Inverse Kinematics", "CAD", "Embedded"],
+    slug: "robotic-arm",
+    title: "6-DOF Robotic Arm",
+    description: "Design, build, and control a small desktop robotic arm with inverse kinematics.",
+    year: "2024",
+    tags: ["Robotics", "Inverse Kinematics", "CAD", "Embedded"],
     image: "/projects/placeholder.svg",
   },
 ];
