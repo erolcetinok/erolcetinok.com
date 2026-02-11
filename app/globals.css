@@ -938,7 +938,8 @@ li a:hover::after {
   align-items: baseline;
   justify-content: space-between;
   gap: 0.35rem 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
 }
 
 .project-card__title {
@@ -949,6 +950,7 @@ li a:hover::after {
   letter-spacing: -0.02em;
   color: var(--text-color-primary);
   margin: 0;
+  padding: 0;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -964,6 +966,7 @@ li a:hover::after {
   list-style: none;
   margin: 0 0 0.5rem 0;
   padding: 0;
+  padding-inline-start: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
@@ -996,6 +999,7 @@ html.dark .project-tag {
   line-height: 1.5;
   color: var(--text-color-secondary);
   margin: 0;
+  padding: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1040,6 +1044,25 @@ html.dark .project-tag {
 .project-card__content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline-start: 0;
+  margin-inline-start: 0;
+}
+
+/* Force same leading edge for title row, tags, and description */
+.project-card__content > .project-card__top,
+.project-card__content > .project-card__tags,
+.project-card__content > .project-card__description {
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+/* Override any global h2 margin in card title */
+.project-card__content .project-card__title {
+  margin-inline-start: 0;
+  padding-inline-start: 0;
 }
 
 /* Project detail page */
