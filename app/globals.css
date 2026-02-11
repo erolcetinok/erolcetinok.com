@@ -1052,12 +1052,20 @@ html.dark .project-tag {
   margin-inline-start: 0;
 }
 
-/* Same leading edge: title, then tags, then description (vertical order only) */
-.project-card__content > .project-card__top,
-.project-card__content > .project-card__tags,
-.project-card__content > .project-card__description {
+/* Stepped indent: title, then tags a bit right, then description a bit more right */
+.project-card__content > .project-card__top {
   margin-inline-start: 0;
   padding-inline-start: 0;
+}
+
+.project-card__content > .project-card__tags {
+  margin-inline-start: 0;
+  padding-inline-start: 0.25rem;
+}
+
+.project-card__content > .project-card__description {
+  margin-inline-start: 0;
+  padding-inline-start: 0.5rem;
 }
 
 .project-card__content .project-card__title {
