@@ -18,6 +18,14 @@ export type Project = {
 
 export const PROJECTS: readonly Project[] = [
   {
+    slug: "test-project-123",
+    title: "Test Project 123",
+    description: "Testing out the functionality of the project page for my personal website.",
+    year: "2026",
+    tags: ["Testing", "Project", "CAD", "Gooning"],
+    image: "/projects/placeholder.svg",
+  },
+  {
     slug: "robotic-arm",
     title: "6-DOF Robotic Arm",
     description: "Design, build, and control a small desktop robotic arm with inverse kinematics.",
@@ -25,10 +33,82 @@ export const PROJECTS: readonly Project[] = [
     tags: ["Robotics", "Inverse Kinematics", "CAD", "Embedded"],
     image: "/projects/placeholder.svg",
   },
-];
+  {
+    slug: "autonomous-rover",
+    title: "Autonomous Rover Navigation",
+    description: "ROS-based path planning and obstacle avoidance for a wheeled rover.",
+    year: "2024",
+    tags: ["ROS", "Robotics", "Path Planning", "Python"],
+    image: "/projects/placeholder.svg",
+  },
+  {
+    slug: "cnc-router",
+    title: "Desktop CNC Router",
+    description: "DIY CNC build for PCB milling and light machining.",
+    year: "2023",
+    tags: ["CNC", "CAD", "Mechanical Design", "Electronics"],
+    image: "/projects/placeholder.svg",
+  },
+  {
+    slug: "sensor-fusion",
+    title: "IMU & Sensor Fusion",
+    description: "Kalman filtering and sensor fusion for orientation estimation.",
+    year: "2024",
+    tags: ["Sensor Fusion", "Kalman Filter", "Embedded", "C++"],
+    image: "/projects/placeholder.svg",
+  },
+  {
+    slug: "quadcopter",
+    title: "Quadcopter Build",
+    description: "Custom frame and flight controller tuning for indoor flight.",
+    year: "2023",
+    tags: ["Robotics", "Electronics", "CAD", "Embedded"],
+    image: "/projects/placeholder.svg",
+  },
+];  
 
 export type ProjectSlug = (typeof PROJECTS)[number]["slug"];
 
 export function getProjectBySlug(slug: string): Project | null {
   return PROJECTS.find((p) => p.slug === slug) ?? null;
+}
+
+/** All unique tags across projects, sorted. */
+export function getAllTags(): string[] {
+  const set = new Set<string>();
+  for (const p of PROJECTS) {
+    for (const tag of p.tags) set.add(tag);
+  }
+  return [...set].sort();
+}
+
+const POPULAR_TAG_LIMIT = 5;
+
+/** Tags sorted by how many projects use them (most first), then alphabetically. */
+export function getTagsByPopularity(): string[] {
+  const count = new Map<string, number>();
+  for (const p of PROJECTS) {
+    for (const tag of p.tags) {
+      count.set(tag, (count.get(tag) ?? 0) + 1);
+    }
+  }
+  return [...count.keys()].sort((a, b) => {
+    const n = (count.get(b) ?? 0) - (count.get(a) ?? 0);
+    return n !== 0 ? n : a.localeCompare(b);
+  });
+}
+
+/** Top N most popular tags and the rest, for filter UI. */
+export function getPrimaryAndRestTags(): { primary: string[]; rest: string[] } {
+  const byPopularity = getTagsByPopularity();
+  return {
+    primary: byPopularity.slice(0, POPULAR_TAG_LIMIT),
+    rest: byPopularity.slice(POPULAR_TAG_LIMIT),
+  };
+}
+
+/** Projects that include the given tag; pass undefined to get all. */
+export function getProjectsByTag(tag: string | undefined): readonly Project[] {
+  if (!tag) return PROJECTS;
+  return PROJECTS.filter((p) => p.tags.includes(tag));
 }

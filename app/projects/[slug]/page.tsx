@@ -30,8 +30,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
         {project.tags.length > 0 && (
           <ul className="project-detail__tags" aria-label="Project tags">
-            {project.tags.map((tag) => (
-              <li key={tag}>
+            {project.tags.map((tag, i) => (
+              <li key={`${tag}-${i}`}>
                 <span className="project-tag">{tag}</span>
               </li>
             ))}

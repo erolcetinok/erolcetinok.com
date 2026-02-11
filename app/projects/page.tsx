@@ -1,8 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PROJECTS } from "@/lib/projects";
+import { getPrimaryAndRestTags, getProjectsByTag } from "@/lib/projects";
+import { ProjectsFilter } from "@/components/ProjectsFilter";
 
-export default function ProjectsPage() {
+type Props = { searchParams: Promise<{ tag?: string }> };
+
+export default async function ProjectsPage({ searchParams }: Props) {
+  const { tag: tagParam } = await searchParams;
+  const tagFilter = typeof tagParam === "string" ? tagParam : undefined;
+  const { primary, rest } = getPrimaryAndRestTags();
+  const projects = getProjectsByTag(tagFilter);
+  const hasTags = primary.length > 0 || rest.length > 0;
+
   return (
     <section className="projects-page">
       <header className="projects-header">
@@ -13,8 +22,16 @@ export default function ProjectsPage() {
         </p>
       </header>
 
+      {hasTags && (
+        <ProjectsFilter
+          primaryTags={primary}
+          restTags={rest}
+          currentTag={tagFilter}
+        />
+      )}
+
       <ul className="projects-list" aria-label="Project list">
-        {PROJECTS.map((project) => (
+        {projects.map((project) => (
           <li key={project.slug}>
             <Link
               href={`/projects/${project.slug}`}
@@ -44,8 +61,8 @@ export default function ProjectsPage() {
                 </div>
                 {project.tags.length > 0 && (
                   <ul className="project-card__tags" aria-label="Project tags">
-                    {project.tags.map((tag) => (
-                      <li key={tag}>
+                    {project.tags.map((tag, i) => (
+                      <li key={`${tag}-${i}`}>
                         <span className="project-tag">{tag}</span>
                       </li>
                     ))}
