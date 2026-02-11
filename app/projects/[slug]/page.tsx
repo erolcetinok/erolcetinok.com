@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { getProjectBySlug } from "@/lib/projects";
+import { getProjectContent } from "@/lib/projectContent";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -10,6 +13,8 @@ export default async function ProjectPage({ params }: Props) {
   const project = getProjectBySlug(slug);
 
   if (!project) notFound();
+
+  const content = await getProjectContent(slug);
 
   return (
     <article className="project-detail">
@@ -48,9 +53,15 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
       <div className="project-detail__content">
-        <p className="project-detail__placeholder">
-          Project write-up and details coming soon.
-        </p>
+        {content ? (
+          <div className="project-detail__markdown">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+          </div>
+        ) : (
+          <p className="project-detail__placeholder">
+            Project write-up and details coming soon.
+          </p>
+        )}
       </div>
     </article>
   );

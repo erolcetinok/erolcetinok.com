@@ -21,34 +21,38 @@ export default function ProjectsPage() {
               className="project-card"
               aria-label={`View project: ${project.title}`}
             >
-              <div className="project-card__top">
-                <h2 className="project-card__title">{project.title}</h2>
-                <span className="project-card__year" aria-label={`Completed ${project.year}`}>
-                  {project.year}
-                </span>
-              </div>
-              {project.tags.length > 0 && (
-                <ul className="project-card__tags" aria-label="Project tags">
-                  {project.tags.map((tag) => (
-                    <li key={tag}>
-                      <span className="project-tag">{tag}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <p className="project-card__description">{project.description}</p>
-              {project.image && (
+              {project.image ? (
                 <span className="project-card__image-wrap">
                   <Image
                     src={project.image}
                     alt=""
-                    width={800}
-                    height={450}
+                    width={320}
+                    height={320}
                     className="project-card__image"
-                    sizes="(max-width: 520px) 100vw, 640px"
+                    sizes="(max-width: 520px) 120px, 160px"
                   />
                 </span>
+              ) : (
+                <span className="project-card__image-wrap project-card__image-wrap--placeholder" aria-hidden />
               )}
+              <div className="project-card__content">
+                <div className="project-card__top">
+                  <h2 className="project-card__title">{project.title}</h2>
+                  <span className="project-card__year" aria-label={`Completed ${project.year}`}>
+                    {project.year}
+                  </span>
+                </div>
+                {project.tags.length > 0 && (
+                  <ul className="project-card__tags" aria-label="Project tags">
+                    {project.tags.map((tag) => (
+                      <li key={tag}>
+                        <span className="project-tag">{tag}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="project-card__description">{project.description}</p>
+              </div>
             </Link>
           </li>
         ))}

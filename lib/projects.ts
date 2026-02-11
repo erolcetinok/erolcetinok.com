@@ -2,6 +2,9 @@
  * Project list for the Projects page and detail routes.
  * Add or edit entries here; slug is used in the URL (/projects/[slug]).
  * Put project images in /public/projects/ and set image to "/projects/filename.jpg".
+ *
+ * To add a write-up for a project, create content/projects/<slug>.md and write in Markdown.
+ * If no .md file exists for a slug, the detail page shows "coming soon".
  */
 
 export type Project = {
@@ -20,6 +23,7 @@ export const PROJECTS: readonly Project[] = [
     description: "Design, build, and control a small desktop robotic arm with inverse kinematics.",
     year: "2024",
     tags: ["Robotics", "Inverse Kinematics", "CAD", "Embedded"],
+    image: "/projects/placeholder.svg",
   },
   {
     slug: "autonomous-navigation",
@@ -27,6 +31,7 @@ export const PROJECTS: readonly Project[] = [
     description: "ROS-based path planning and obstacle avoidance for a wheeled rover.",
     year: "2024",
     tags: ["ROS", "Path Planning", "SLAM", "Python"],
+    image: "/projects/placeholder.svg",
   },
   {
     slug: "cnc-router",
