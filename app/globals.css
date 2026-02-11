@@ -911,7 +911,7 @@ li a:hover::after {
 @media (min-width: 520px) {
   .project-card {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 }
@@ -943,7 +943,7 @@ li a:hover::after {
 
 .project-card__title {
   font-family: var(--font-sans);
-  font-size: 1.625rem;
+  font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -983,6 +983,11 @@ li a:hover::after {
   color: var(--text-color-secondary);
   background: color-mix(in srgb, var(--foreground) 8%, var(--background));
   border-radius: var(--radius-bevel);
+}
+
+html.dark .project-tag {
+  color: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--foreground) 18%, var(--background));
   white-space: nowrap;
 }
 
