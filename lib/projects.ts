@@ -5,13 +5,24 @@
  *
  * To add a write-up for a project, create content/projects/<slug>.md and write in Markdown.
  * If no .md file exists for a slug, the detail page shows "coming soon".
+ *
+ * category: used for the top-level filter so recruiters can narrow by focus area quickly.
  */
+
+export const CATEGORIES = [
+  { slug: "robotics", label: "Robotics & Motion" },
+  { slug: "embedded", label: "Embedded Systems" },
+  { slug: "software", label: "Software & Tools" },
+  { slug: "mechanical", label: "Mechanical & CAD" },
+] as const;
 
 export type Project = {
   slug: string;
   title: string;
   description: string;
   year: string;
+  /** High-level category for filter (slug from CATEGORIES). */
+  category: (typeof CATEGORIES)[number]["slug"];
   tags: readonly string[];
   image?: string;
 };
@@ -22,6 +33,7 @@ export const PROJECTS: readonly Project[] = [
     title: "Test Project 123",
     description: "Testing out the functionality of the project page for my personal website.",
     year: "2026",
+    category: "mechanical",
     tags: ["Testing", "Project", "CAD", "Gooning"],
     image: "/projects/placeholder.svg",
   },
@@ -30,6 +42,7 @@ export const PROJECTS: readonly Project[] = [
     title: "6-DOF Robotic Arm",
     description: "Design, build, and control a small desktop robotic arm with inverse kinematics.",
     year: "2024",
+    category: "robotics",
     tags: ["Robotics", "Inverse Kinematics", "CAD", "Embedded"],
     image: "/projects/placeholder.svg",
   },
@@ -38,6 +51,7 @@ export const PROJECTS: readonly Project[] = [
     title: "Autonomous Rover Navigation",
     description: "ROS-based path planning and obstacle avoidance for a wheeled rover.",
     year: "2024",
+    category: "robotics",
     tags: ["ROS", "Robotics", "Path Planning", "Python"],
     image: "/projects/placeholder.svg",
   },
@@ -46,6 +60,7 @@ export const PROJECTS: readonly Project[] = [
     title: "Desktop CNC Router",
     description: "DIY CNC build for PCB milling and light machining.",
     year: "2023",
+    category: "mechanical",
     tags: ["CNC", "CAD", "Mechanical Design", "Electronics"],
     image: "/projects/placeholder.svg",
   },
@@ -54,6 +69,7 @@ export const PROJECTS: readonly Project[] = [
     title: "IMU & Sensor Fusion",
     description: "Kalman filtering and sensor fusion for orientation estimation.",
     year: "2024",
+    category: "embedded",
     tags: ["Sensor Fusion", "Kalman Filter", "Embedded", "C++"],
     image: "/projects/placeholder.svg",
   },
@@ -62,6 +78,7 @@ export const PROJECTS: readonly Project[] = [
     title: "Quadcopter Build",
     description: "Custom frame and flight controller tuning for indoor flight.",
     year: "2023",
+    category: "robotics",
     tags: ["Robotics", "Electronics", "CAD", "Embedded"],
     image: "/projects/placeholder.svg",
   },
@@ -73,42 +90,12 @@ export function getProjectBySlug(slug: string): Project | null {
   return PROJECTS.find((p) => p.slug === slug) ?? null;
 }
 
-/** All unique tags across projects, sorted. */
-export function getAllTags(): string[] {
-  const set = new Set<string>();
-  for (const p of PROJECTS) {
-    for (const tag of p.tags) set.add(tag);
-  }
-  return [...set].sort();
-}
-
-const POPULAR_TAG_LIMIT = 5;
-
-/** Tags sorted by how many projects use them (most first), then alphabetically. */
-export function getTagsByPopularity(): string[] {
-  const count = new Map<string, number>();
-  for (const p of PROJECTS) {
-    for (const tag of p.tags) {
-      count.set(tag, (count.get(tag) ?? 0) + 1);
-    }
-  }
-  return [...count.keys()].sort((a, b) => {
-    const n = (count.get(b) ?? 0) - (count.get(a) ?? 0);
-    return n !== 0 ? n : a.localeCompare(b);
-  });
-}
-
-/** Top N most popular tags and the rest, for filter UI. */
-export function getPrimaryAndRestTags(): { primary: string[]; rest: string[] } {
-  const byPopularity = getTagsByPopularity();
-  return {
-    primary: byPopularity.slice(0, POPULAR_TAG_LIMIT),
-    rest: byPopularity.slice(POPULAR_TAG_LIMIT),
-  };
-}
-
-/** Projects that include the given tag; pass undefined to get all. */
-export function getProjectsByTag(tag: string | undefined): readonly Project[] {
-  if (!tag) return PROJECTS;
-  return PROJECTS.filter((p) => p.tags.includes(tag));
+/** Projects in the given category; pass undefined to get all. */
+export function getProjectsByCategory(
+  category: string | undefined
+): readonly Project[] {
+  if (!category) return PROJECTS;
+  const valid = CATEGORIES.some((c) => c.slug === category);
+  if (!valid) return PROJECTS;
+  return PROJECTS.filter((p) => p.category === category);
 }

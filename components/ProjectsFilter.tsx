@@ -1,72 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+
+type Category = { slug: string; label: string };
 
 type Props = {
-  primaryTags: string[];
-  restTags: string[];
-  currentTag: string | undefined;
+  categories: readonly Category[];
+  currentCategory: string | undefined;
 };
 
-export function ProjectsFilter({ primaryTags, restTags, currentTag }: Props) {
-  const [showMore, setShowMore] = useState(() =>
-    currentTag ? restTags.includes(currentTag) : false
-  );
-  const hasRest = restTags.length > 0;
-
+export function ProjectsFilter({ categories, currentCategory }: Props) {
   return (
-    <nav className="projects-filter" aria-label="Filter by tag">
-      <span className="projects-filter__label">Filter</span>
+    <nav className="projects-filter" aria-label="Filter by focus area">
+      <span className="projects-filter__label">Focus</span>
       <div className="projects-filter__pills">
         <Link
           href="/projects"
-          className={`projects-filter__pill ${!currentTag ? "is-active" : ""}`}
+          className={`projects-filter__pill ${!currentCategory ? "is-active" : ""}`}
         >
           All
         </Link>
-        {primaryTags.map((tag) => (
+        {categories.map(({ slug, label }) => (
           <Link
-            key={tag}
-            href={`/projects?tag=${encodeURIComponent(tag)}`}
-            className={`projects-filter__pill ${currentTag === tag ? "is-active" : ""}`}
+            key={slug}
+            href={`/projects?category=${encodeURIComponent(slug)}`}
+            className={`projects-filter__pill ${currentCategory === slug ? "is-active" : ""}`}
           >
-            {tag}
+            {label}
           </Link>
         ))}
-        {hasRest && (
-          <>
-            <button
-              type="button"
-              className="projects-filter__pill projects-filter__pill--toggle"
-              onClick={() => setShowMore((v) => !v)}
-              aria-expanded={showMore}
-            >
-              {showMore ? "Show less" : "Show more"}
-            </button>
-            {showMore && (
-              <>
-                {restTags.map((tag) => (
-                  <Link
-                    key={tag}
-                    href={`/projects?tag=${encodeURIComponent(tag)}`}
-                    className={`projects-filter__pill ${currentTag === tag ? "is-active" : ""}`}
-                  >
-                    {tag}
-                  </Link>
-                ))}
-                <button
-                  type="button"
-                  className="projects-filter__pill projects-filter__pill--toggle projects-filter__pill--hide"
-                  onClick={() => setShowMore(false)}
-                  aria-label="Hide extra tags"
-                >
-                  Hide
-                </button>
-              </>
-            )}
-          </>
-        )}
       </div>
     </nav>
   );

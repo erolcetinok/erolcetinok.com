@@ -1,16 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getPrimaryAndRestTags, getProjectsByTag } from "@/lib/projects";
+import { CATEGORIES, getProjectsByCategory } from "@/lib/projects";
 import { ProjectsFilter } from "@/components/ProjectsFilter";
 
-type Props = { searchParams: Promise<{ tag?: string }> };
+type Props = { searchParams: Promise<{ category?: string }> };
 
 export default async function ProjectsPage({ searchParams }: Props) {
-  const { tag: tagParam } = await searchParams;
-  const tagFilter = typeof tagParam === "string" ? tagParam : undefined;
-  const { primary, rest } = getPrimaryAndRestTags();
-  const projects = getProjectsByTag(tagFilter);
-  const hasTags = primary.length > 0 || rest.length > 0;
+  const { category: categoryParam } = await searchParams;
+  const categoryFilter =
+    typeof categoryParam === "string" ? categoryParam : undefined;
+  const projects = getProjectsByCategory(categoryFilter);
 
   return (
     <section className="projects-page">
@@ -22,13 +21,10 @@ export default async function ProjectsPage({ searchParams }: Props) {
         </p>
       </header>
 
-      {hasTags && (
-        <ProjectsFilter
-          primaryTags={primary}
-          restTags={rest}
-          currentTag={tagFilter}
-        />
-      )}
+      <ProjectsFilter
+        categories={CATEGORIES}
+        currentCategory={categoryFilter}
+      />
 
       <ul className="projects-list" aria-label="Project list">
         {projects.map((project) => (
