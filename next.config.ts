@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   experimental: {
-    // Disable Turbopack dev cache to avoid "Persisting failed: Unable to write SST file" on some systems
     turbopackFileSystemCacheForDev: false,
+  },
+  webpack: (config, { dev }) => {
+    if (dev) config.cache = false;
+    return config;
   },
 };
 

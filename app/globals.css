@@ -937,16 +937,6 @@ li a:hover::after {
   opacity: 0.92;
 }
 
-.projects-filter__pill--toggle {
-  cursor: pointer;
-  font-family: inherit;
-  border: 1px solid color-mix(in srgb, var(--foreground) 25%, var(--background));
-}
-
-html.dark .projects-filter__pill--toggle {
-  border-color: color-mix(in srgb, var(--foreground) 28%, var(--background));
-}
-
 html.dark .projects-filter__pill {
   color: rgba(255, 255, 255, 0.9);
   background: color-mix(in srgb, var(--foreground) 14%, var(--background));
