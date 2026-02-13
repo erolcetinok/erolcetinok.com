@@ -984,12 +984,18 @@ html.dark .projects-filter__pill.is-active {
   padding: 0.4rem 0.85rem;
   padding-right: calc(0.4rem + 16px); /* room for clear button only; no extra right gap */
   font-size: 0.875rem;
+  font-weight: 700;
   line-height: 1.3;
   font-family: inherit;
-  color: var(--text-color-primary);
-  background: var(--background);
-  border: 1px solid color-mix(in srgb, var(--foreground) 25%, var(--background));
+  color: var(--text-color-secondary);
+  background: color-mix(in srgb, var(--foreground) 8%, var(--background));
+  border: 1px solid transparent;
   border-radius: var(--radius-bevel);
+}
+
+html.dark .projects-search__input {
+  color: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--foreground) 18%, var(--background));
 }
 
 .projects-search__input::placeholder {
@@ -998,8 +1004,13 @@ html.dark .projects-filter__pill.is-active {
 
 .projects-search__input:focus {
   outline: none;
-  background: color-mix(in srgb, var(--background) 92%, var(--foreground));
-  color: var(--color-neutral-950);
+  background: color-mix(in srgb, var(--foreground) 14%, var(--background));
+  color: var(--text-color-primary);
+}
+
+html.dark .projects-search__input:focus {
+  background: color-mix(in srgb, var(--foreground) 26%, var(--background));
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Clear button: flush to right edge of input */
