@@ -1,0 +1,17 @@
+---
+title: Test Project 123
+description: Testing out the functionality of the project page for my personal website.
+year: "2026"
+categories:
+  - robotics
+tags:
+  - Testing
+  - Project
+  - CAD
+  - Gooning
+image: /projects/placeholder.svg
+---
+
+# Overview
+
+This is a test project to verify the project page and detail layout.
