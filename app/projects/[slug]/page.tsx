@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { getProjectBySlug, getProjects } from "@/lib/projects";
+import { mdxComponents } from "@/components/mdx";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,28 +23,47 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) notFound();
 
+  const publishedLabel = project.date || project.year || "—";
+
   return (
     <article className="project-detail">
       <Link href="/projects" className="project-detail__back link-body">
         ← Projects
       </Link>
       <header className="project-detail__header">
-        <div className="project-detail__meta">
-          <h1 className="project-detail__title">{project.title}</h1>
-          <span className="project-detail__year" aria-label={`Completed ${project.year}`}>
-            {project.year}
-          </span>
+        <h1 className="project-detail__title">{project.title}</h1>
+        <div className="project-detail__meta-grid">
+          <span className="project-detail__meta-label">Published</span>
+          <span className="project-detail__meta-value">{publishedLabel}</span>
+          {project.link && (
+            <>
+              <span className="project-detail__meta-label">
+                {project.linkLabel ?? "Link"}
+              </span>
+              <span className="project-detail__meta-value">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project-detail__meta-link"
+                >
+                  {project.linkLabel ?? "Link"}
+                </a>
+              </span>
+            </>
+          )}
+          {project.tags.length > 0 && (
+            <>
+              <span className="project-detail__meta-label">Tags</span>
+              <span className="project-detail__meta-value project-detail__meta-tags">
+                {project.tags.join(", ")}
+              </span>
+            </>
+          )}
         </div>
-        {project.tags.length > 0 && (
-          <ul className="project-detail__tags" aria-label="Project tags">
-            {project.tags.map((tag, i) => (
-              <li key={`${tag}-${i}`}>
-                <span className="project-tag">{tag}</span>
-              </li>
-            ))}
-          </ul>
+        {project.description && (
+          <p className="project-detail__description">{project.description}</p>
         )}
-        <p className="project-detail__description">{project.description}</p>
       </header>
       {project.image && (
         <div className="project-detail__image-wrap">
@@ -62,7 +81,7 @@ export default async function ProjectPage({ params }: Props) {
       <div className="project-detail__content">
         {project.content ? (
           <div className="project-detail__markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown>
+            <MDXRemote source={project.content} components={mdxComponents} />
           </div>
         ) : (
           <p className="project-detail__placeholder">

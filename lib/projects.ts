@@ -1,7 +1,7 @@
 /**
- * Projects are loaded from content/projects/*.md.
- * Each file has YAML frontmatter: title, description, year, tags, categories, image (optional).
- * Slug = filename without .md. Body is the Markdown write-up shown on the detail page.
+ * Projects are loaded from content/projects/*.mdx.
+ * Frontmatter: title, description, year, tags, categories, image (optional).
+ * Optional: date, link, linkLabel. Body = MDX write-up on the detail page.
  */
 
 import { readdir, readFile } from "node:fs/promises";
@@ -26,6 +26,12 @@ export type Project = {
   categories: readonly (typeof CATEGORIES)[number]["slug"][];
   tags: readonly string[];
   image?: string;
+  /** Optional full date string for "Published" (e.g. "October 31, 2024") */
+  date?: string;
+  /** Optional URL for paper, code, or other link */
+  link?: string;
+  /** Label for link (default "Link"; use "Paper", "Code", etc.) */
+  linkLabel?: string;
 };
 
 export type ProjectWithContent = Project & { content: string };
@@ -37,6 +43,9 @@ type Frontmatter = {
   tags?: string[];
   categories?: string[];
   image?: string;
+  date?: string;
+  link?: string;
+  linkLabel?: string;
 };
 
 function parseFrontmatter(slug: string, data: Frontmatter): Project {
@@ -55,30 +64,42 @@ function parseFrontmatter(slug: string, data: Frontmatter): Project {
     typeof data.image === "string" && data.image.length > 0
       ? data.image
       : undefined;
-  return { slug, title, description, year, categories, tags, image };
+  const date =
+    typeof data.date === "string" && data.date.length > 0
+      ? data.date
+      : undefined;
+  const link =
+    typeof data.link === "string" && data.link.length > 0
+      ? data.link
+      : undefined;
+  const linkLabel =
+    typeof data.linkLabel === "string" && data.linkLabel.length > 0
+      ? data.linkLabel
+      : undefined;
+  return { slug, title, description, year, categories, tags, image, date, link, linkLabel };
 }
 
-/** All projects from content/projects/*.md (metadata only, no body). */
+/** All projects from content/projects/*.mdx (metadata only, no body). */
 export async function getProjects(): Promise<Project[]> {
   const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
-  const mdFiles = entries
-    .filter((e) => e.isFile() && e.name.endsWith(".md"))
-    .map((e) => e.name.replace(/\.md$/, ""));
+  const mdxFiles = entries
+    .filter((e) => e.isFile() && e.name.endsWith(".mdx"))
+    .map((e) => e.name.replace(/\.mdx$/, ""));
   const projects: Project[] = [];
-  for (const base of mdFiles) {
-    const raw = await readFile(join(CONTENT_DIR, `${base}.md`), "utf-8");
+  for (const base of mdxFiles) {
+    const raw = await readFile(join(CONTENT_DIR, `${base}.mdx`), "utf-8");
     const { data } = matter(raw);
     projects.push(parseFrontmatter(base, data as Frontmatter));
   }
   return projects;
 }
 
-/** Single project with Markdown body for the detail page. */
+/** Single project with MDX body for the detail page. */
 export async function getProjectBySlug(
   slug: string
 ): Promise<ProjectWithContent | null> {
   try {
-    const raw = await readFile(join(CONTENT_DIR, `${slug}.md`), "utf-8");
+    const raw = await readFile(join(CONTENT_DIR, `${slug}.mdx`), "utf-8");
     const { data, content } = matter(raw);
     const project = parseFrontmatter(slug, data as Frontmatter);
     return { ...project, content: content.trim() };
