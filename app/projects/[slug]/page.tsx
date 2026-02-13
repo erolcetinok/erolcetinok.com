@@ -3,18 +3,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getProjectBySlug } from "@/lib/projects";
-import { getProjectContent } from "@/lib/projectContent";
+import { getProjectBySlug, getProjects } from "@/lib/projects";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) notFound();
-
-  const content = await getProjectContent(slug);
 
   return (
     <article className="project-detail">
@@ -53,9 +50,9 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
       <div className="project-detail__content">
-        {content ? (
+        {project.content ? (
           <div className="project-detail__markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{project.content}</ReactMarkdown>
           </div>
         ) : (
           <p className="project-detail__placeholder">
@@ -65,4 +62,9 @@ export default async function ProjectPage({ params }: Props) {
       </div>
     </article>
   );
+}
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ slug: p.slug }));
 }

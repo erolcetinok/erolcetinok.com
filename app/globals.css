@@ -876,15 +876,32 @@ li a:hover::after {
   max-width: 42ch;
 }
 
+.projects-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--background));
+}
+
+.projects-toolbar .projects-search {
+  margin-left: auto;
+}
+
+.projects-toolbar .projects-list {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
 .projects-filter {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem 1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.75rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--background));
+  margin: 0;
 }
 
 .projects-filter__label {
@@ -952,6 +969,57 @@ html.dark .projects-filter__pill.is-active {
   color: var(--background);
   background: rgba(255, 255, 255, 0.92);
   border-color: rgba(255, 255, 255, 0.92);
+}
+
+.projects-search {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.projects-search__input {
+  width: 100%;
+  min-width: 10rem;
+  max-width: 20rem;
+  flex: 0 1 20rem;
+  padding: 0.4rem 0.85rem;
+  padding-right: calc(0.4rem + 16px); /* room for clear button only; no extra right gap */
+  font-size: 0.875rem;
+  line-height: 1.3;
+  font-family: inherit;
+  color: var(--text-color-primary);
+  background: var(--background);
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, var(--background));
+  border-radius: var(--radius-bevel);
+}
+
+.projects-search__input::placeholder {
+  color: var(--text-color-secondary);
+}
+
+.projects-search__input:focus {
+  outline: none;
+  background: color-mix(in srgb, var(--background) 92%, var(--foreground));
+  color: var(--color-neutral-950);
+}
+
+/* Clear button: flush to right edge of input */
+.projects-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-right: -14px; /* pull X to the right edge (offsets WebKit’s internal spacing) */
+  margin-left: 0;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='2' y1='2' x2='14' y2='14' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='14' y1='2' x2='2' y2='14' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='2' y1='2' x2='14' y2='14' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='14' y1='2' x2='2' y2='14' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+  -webkit-mask-size: contain;
+  opacity: 0.75;
+}
+
+.projects-search__input::-webkit-search-cancel-button:hover {
+  opacity: 1;
 }
 
 .projects-list {

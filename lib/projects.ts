@@ -1,13 +1,14 @@
 /**
- * Project list for the Projects page and detail routes.
- * Add or edit entries here; slug is used in the URL (/projects/[slug]).
- * Put project images in /public/projects/ and set image to "/projects/filename.jpg".
- *
- * To add a write-up for a project, create content/projects/<slug>.md and write in Markdown.
- * If no .md file exists for a slug, the detail page shows "coming soon".
- *
- * categories: list of category slugs; a project can appear in multiple focus-area filters.
+ * Projects are loaded from content/projects/*.md.
+ * Each file has YAML frontmatter: title, description, year, tags, categories, image (optional).
+ * Slug = filename without .md. Body is the Markdown write-up shown on the detail page.
  */
+
+import { readdir, readFile } from "node:fs/promises";
+import matter from "gray-matter";
+import { join } from "node:path";
+
+const CONTENT_DIR = join(process.cwd(), "content", "projects");
 
 export const CATEGORIES = [
   { slug: "robotics", label: "Robotics" },
@@ -15,42 +16,84 @@ export const CATEGORIES = [
   { slug: "software", label: "Software" },
 ] as const;
 
+const categorySlugs = new Set(CATEGORIES.map((c) => c.slug));
+
 export type Project = {
   slug: string;
   title: string;
   description: string;
   year: string;
-  /** Focus-area categories (slugs from CATEGORIES); a project can have multiple. */
   categories: readonly (typeof CATEGORIES)[number]["slug"][];
   tags: readonly string[];
   image?: string;
 };
 
-export const PROJECTS: readonly Project[] = [
-  {
-    slug: "test-project-123",
-    title: "Test Project 123",
-    description: "Testing out the functionality of the project page for my personal website.",
-    year: "2026",
-    categories: ["robotics"],
-    tags: ["Testing", "Project", "CAD", "Gooning"],
-    image: "/projects/placeholder.svg",
-  },
-];
+export type ProjectWithContent = Project & { content: string };
 
-export type ProjectSlug = (typeof PROJECTS)[number]["slug"];
+type Frontmatter = {
+  title?: string;
+  description?: string;
+  year?: string;
+  tags?: string[];
+  categories?: string[];
+  image?: string;
+};
 
-export function getProjectBySlug(slug: string): Project | null {
-  return PROJECTS.find((p) => p.slug === slug) ?? null;
+function parseFrontmatter(slug: string, data: Frontmatter): Project {
+  const title = typeof data.title === "string" ? data.title : slug;
+  const description =
+    typeof data.description === "string" ? data.description : "";
+  const year = typeof data.year === "string" ? data.year : "";
+  const rawTags = Array.isArray(data.tags) ? data.tags : [];
+  const tags = rawTags.filter((t): t is string => typeof t === "string");
+  const rawCategories = Array.isArray(data.categories) ? data.categories : [];
+  const categories = rawCategories.filter(
+    (c): c is (typeof CATEGORIES)[number]["slug"] =>
+      typeof c === "string" && categorySlugs.has(c as (typeof CATEGORIES)[number]["slug"])
+  ) as (typeof CATEGORIES)[number]["slug"][];
+  const image =
+    typeof data.image === "string" && data.image.length > 0
+      ? data.image
+      : undefined;
+  return { slug, title, description, year, categories, tags, image };
 }
 
-/** Projects that include the given category; pass undefined to get all. */
-export function getProjectsByCategory(
+/** All projects from content/projects/*.md (metadata only, no body). */
+export async function getProjects(): Promise<Project[]> {
+  const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
+  const mdFiles = entries
+    .filter((e) => e.isFile() && e.name.endsWith(".md"))
+    .map((e) => e.name.replace(/\.md$/, ""));
+  const projects: Project[] = [];
+  for (const base of mdFiles) {
+    const raw = await readFile(join(CONTENT_DIR, `${base}.md`), "utf-8");
+    const { data } = matter(raw);
+    projects.push(parseFrontmatter(base, data as Frontmatter));
+  }
+  return projects;
+}
+
+/** Single project with Markdown body for the detail page. */
+export async function getProjectBySlug(
+  slug: string
+): Promise<ProjectWithContent | null> {
+  try {
+    const raw = await readFile(join(CONTENT_DIR, `${slug}.md`), "utf-8");
+    const { data, content } = matter(raw);
+    const project = parseFrontmatter(slug, data as Frontmatter);
+    return { ...project, content: content.trim() };
+  } catch {
+    return null;
+  }
+}
+
+/** Projects that include the given category; pass undefined for all. */
+export async function getProjectsByCategory(
   category: string | undefined
-): readonly Project[] {
-  if (!category) return PROJECTS;
-  const valid = CATEGORIES.some((c) => c.slug === category);
-  if (!valid) return PROJECTS;
-  const slug = category as (typeof CATEGORIES)[number]["slug"];
-  return PROJECTS.filter((p) => p.categories.includes(slug));
+): Promise<Project[]> {
+  const all = await getProjects();
+  if (!category) return all;
+  if (!categorySlugs.has(category as (typeof CATEGORIES)[number]["slug"]))
+    return all;
+  return all.filter((p) => p.categories.includes(category as (typeof CATEGORIES)[number]["slug"]));
 }
