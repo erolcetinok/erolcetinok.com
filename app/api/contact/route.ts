@@ -8,6 +8,14 @@ export async function POST(req: Request) {
     const lastName = String(body.lastName || "").trim();
     const email = String(body.email || "").trim();
     const message = String(body.message || "").trim();
+    const honeypot = String(body.website || "").trim();
+
+    if (honeypot) {
+      return NextResponse.json(
+        { ok: false, error: "Please fill out all fields." },
+        { status: 400 }
+      );
+    }
 
     if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(

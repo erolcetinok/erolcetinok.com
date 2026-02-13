@@ -24,6 +24,8 @@ export default function ContactPage() {
       lastName: String(formData.get("lastName") || "").trim(),
       email: String(formData.get("email") || "").trim(),
       message: String(formData.get("message") || "").trim(),
+      // Honeypot: leave empty. Bots often fill it; we reject if set.
+      website: String(formData.get("website") || "").trim(),
     };
 
     try {
@@ -57,12 +59,24 @@ export default function ContactPage() {
         <p className="contact-intro">
           If you&apos;d like to collaborate, have questions, or just want to say hello,
           you can email me at{" "}
-          <a href={`mailto:${SOCIAL_LINKS.email}`}>erol (dot) cetinok (at) gmail (dot) com</a> or use
+          <a href={`mailto:${SOCIAL_LINKS.email}`}>erolcetinok (at) gmail (dot) com</a> or use
           the form below.
         </p>
       </header>
 
       <form onSubmit={onSubmit} className="contact-form">
+        {/* Honeypot: hidden from users; bots that fill it are rejected */}
+        <div className="contact-honeypot" aria-hidden="true">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="contact-grid">
           <label className="field">
             <span>First name</span>
@@ -90,7 +104,7 @@ export default function ContactPage() {
           className="contact-submit"
           disabled={status.type === "sending"}
         >
-          {status.type === "sending" ? "Sending…" : "SEND"}
+          {status.type === "sending" ? "Sending…" : "Send"}
         </button>
 
         {status.type === "success" && (

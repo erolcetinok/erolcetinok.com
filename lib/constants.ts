@@ -6,8 +6,6 @@
 export const MENU_NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Writing" },
-  { href: "/media", label: "Media" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -18,10 +16,3 @@ export const SOCIAL_LINKS = {
   email: "erol.cetinok@gmail.com",
   resume: "/resume.pdf",
 } as const;
-
-export const FOOTER_LINKS = [
-  { href: SOCIAL_LINKS.linkedin, label: "LinkedIn" },
-  { href: SOCIAL_LINKS.github, label: "GitHub" },
-  { href: SOCIAL_LINKS.resume, label: "Curriculum Vitae" },
-  { href: "/contact", label: "Contact" },
-] as const;

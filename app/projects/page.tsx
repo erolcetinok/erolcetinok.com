@@ -1,6 +1,12 @@
-import { CATEGORIES, getProjectsByCategory } from "@/lib/projects";
+import { CATEGORIES, getProjects, getProjectsByCategory } from "@/lib/projects";
 import { ProjectsFilter } from "@/components/ProjectsFilter";
 import { ProjectsListWithSearch } from "@/components/ProjectsListWithSearch";
+
+export const metadata = {
+  title: "Projects",
+  description:
+    "Projects by Erol Cetinok — robotics, mechanical, and software work.",
+};
 
 type Props = { searchParams: Promise<{ category?: string }> };
 
@@ -8,7 +14,10 @@ export default async function ProjectsPage({ searchParams }: Props) {
   const { category: categoryParam } = await searchParams;
   const categoryFilter =
     typeof categoryParam === "string" ? categoryParam : undefined;
-  const projects = await getProjectsByCategory(categoryFilter);
+  const [projects, allProjects] = await Promise.all([
+    getProjectsByCategory(categoryFilter),
+    getProjects(),
+  ]);
 
   return (
     <section className="projects-page">
@@ -25,7 +34,10 @@ export default async function ProjectsPage({ searchParams }: Props) {
           categories={CATEGORIES}
           currentCategory={categoryFilter}
         />
-        <ProjectsListWithSearch projects={projects} />
+        <ProjectsListWithSearch
+          projects={projects}
+          allProjects={allProjects}
+        />
       </div>
     </section>
   );

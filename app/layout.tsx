@@ -3,6 +3,15 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from "@/components/providers";
 
+export const metadata = {
+  title: {
+    default: "Erol Cetinok",
+    template: "%s | Erol Cetinok",
+  },
+  description:
+    "Personal site of Erol Cetinok — aspiring mechanical engineer and roboticist. Projects, contact, and more.",
+};
+
 /** Inline script runs before first paint to prevent theme flash (white flash in dark mode on refresh). */
 const themeScript = `
 (function(){

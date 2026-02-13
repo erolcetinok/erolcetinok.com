@@ -5,7 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/projects";
 
-type Props = { projects: Project[] };
+type Props = {
+  /** Category-filtered list: shown when search is empty */
+  projects: Project[];
+  /** All projects: search runs over this when user types (search supersedes category) */
+  allProjects: Project[];
+};
 
 function matchesQuery(project: Project, query: string): boolean {
   const q = query.trim().toLowerCase();
@@ -15,11 +20,12 @@ function matchesQuery(project: Project, query: string): boolean {
   return project.tags.some((t) => t.toLowerCase().includes(q));
 }
 
-export function ProjectsListWithSearch({ projects }: Props) {
+export function ProjectsListWithSearch({ projects, allProjects }: Props) {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
-  const filtered = deferredQuery.trim()
-    ? projects.filter((p) => matchesQuery(p, deferredQuery))
+  const hasSearch = deferredQuery.trim().length > 0;
+  const filtered = hasSearch
+    ? allProjects.filter((p) => matchesQuery(p, deferredQuery))
     : projects;
 
   return (

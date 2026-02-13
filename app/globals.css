@@ -492,76 +492,6 @@ html.dark .theme-toggle-icon--moon {
 }
 
 /* ==========================================================================
-   Footer
-   ========================================================================== */
-
-.site-footer {
-  background: var(--background);
-  font-family: var(--font-sans);
-  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
-}
-
-.site-footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 32px var(--page-padding);
-}
-
-.site-footer__inner--single {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-
-.footer-brand__name {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
-  line-height: 1;
-}
-
-.footer-links-text {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  font-size: 0.95rem;
-}
-
-.footer-links-text__item {
-  display: flex;
-  align-items: center;
-}
-
-.footer-links-text__item + .footer-links-text__item::before {
-  content: "|";
-  opacity: 0.55;
-  margin: 0 14px;
-}
-
-.footer-links-text__link {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  color: inherit;
-}
-
-.footer-links-text__link:hover {
-  opacity: 0.85;
-}
-
-/* ==========================================================================
    Links
    ========================================================================== */
 
@@ -654,6 +584,16 @@ li a:hover::after {
 .contact-form {
   margin-top: 0;
   max-width: 100%;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .contact-grid {
@@ -1463,16 +1403,4 @@ html.dark .project-tag {
 
 .btn:hover {
   opacity: 0.85;
-}
-
-/* ==========================================================================
-   Responsive
-   ========================================================================== */
-
-@media (max-width: 900px) {
-  .site-footer__inner--single {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
 }
