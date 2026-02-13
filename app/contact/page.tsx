@@ -51,16 +51,16 @@ export default function ContactPage() {
   }
 
   return (
-    <>
-      <div className="contact-intro">
-        <h1>Contact</h1>
-        <p>
+    <section className="contact-page">
+      <header className="contact-header">
+        <h1 className="contact-title">Contact</h1>
+        <p className="contact-intro">
           If you&apos;d like to collaborate, have questions, or just want to say hello,
           you can email me at{" "}
           <a href={`mailto:${SOCIAL_LINKS.email}`}>erol (dot) cetinok (at) gmail (dot) com</a> or use
           the form below.
         </p>
-      </div>
+      </header>
 
       <form onSubmit={onSubmit} className="contact-form">
         <div className="contact-grid">
@@ -103,6 +103,6 @@ export default function ContactPage() {
           <p className="contact-status contact-error">{status.message}</p>
         )}
       </form>
-    </>
+    </section>
   );
 }
