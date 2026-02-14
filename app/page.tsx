@@ -22,7 +22,7 @@ export default function Home() {
             <span className="home-hero__name-line">Cetinok</span>
           </h1>
           <p className="home-hero__tagline">
-            An aspiring engineer & roboticist.
+            I'm an aspiring engineer & roboticist. 
           </p>
           <div className="home-hero__social">
             <a

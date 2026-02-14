@@ -189,6 +189,13 @@ small,
   }
 }
 
+/* Home page: center hero block horizontally only */
+.page:has(.home-hero) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* ==========================================================================
    Header
    ========================================================================== */
