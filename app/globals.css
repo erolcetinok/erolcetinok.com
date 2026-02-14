@@ -1225,7 +1225,23 @@ html.dark .project-tag {
 .project-detail__back {
   display: inline-block;
   margin-bottom: 1.5rem;
-  font-size: 0.9375rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  font-family: var(--font-sans);
+  color: var(--text-color-primary);
+  background: color-mix(in srgb, var(--foreground) 10%, var(--background));
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, var(--background));
+  border-radius: var(--radius-bevel);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.project-detail__back:hover {
+  color: var(--text-color-primary);
+  background: color-mix(in srgb, var(--foreground) 16%, var(--background));
+  border-color: color-mix(in srgb, var(--foreground) 35%, var(--background));
 }
 
 .project-detail__header {
@@ -1272,7 +1288,7 @@ html.dark .project-tag {
 }
 
 .project-detail__meta-tags {
-  color: var(--text-color-secondary);
+  color: var(--text-color-primary);
 }
 
 .project-detail__tags {

@@ -27,7 +27,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <article className="project-detail">
-      <Link href="/projects" className="project-detail__back link-body">
+      <Link href="/projects" className="project-detail__back">
         ← Projects
       </Link>
       <header className="project-detail__header">
