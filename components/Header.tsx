@@ -119,7 +119,9 @@ export default function Header({ className }: { className?: string }) {
               <Link
                 href="/"
                 className="header-center__name"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  if (pathname === "/") setMenuOpen(false);
+                }}
               >
                 Erol Cetinok
               </Link>
@@ -131,8 +133,8 @@ export default function Header({ className }: { className?: string }) {
                   href={currentNavItem.href}
                   className="header-center__section"
                   onClick={() => {
-                    setMenuOpen(false);
                     if (pathname === currentNavItem.href) {
+                      setMenuOpen(false);
                       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                     }
                   }}
@@ -184,6 +186,9 @@ export default function Header({ className }: { className?: string }) {
                     key={item.href}
                     href={item.href}
                     className={`menu-overlay__link ${isActive ? "is-active" : ""}`}
+                    onClick={() => {
+                      if (isActive) setMenuOpen(false);
+                    }}
                   >
                     {item.label}
                   </Link>

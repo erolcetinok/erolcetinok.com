@@ -79,7 +79,18 @@ function parseFrontmatter(slug: string, data: Frontmatter): Project {
   return { slug, title, description, year, categories, tags, image, date, link, linkLabel };
 }
 
-/** All projects from content/projects/*.mdx (metadata only, no body). */
+/** Sort key for newest-first: use date (YYYY-MM-DD) or year (YYYY), older = smaller number. */
+function projectSortKey(p: Project): number {
+  const raw = (p.date ?? p.year ?? "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    const t = new Date(raw + "T12:00:00").getTime();
+    return Number.isNaN(t) ? 0 : t;
+  }
+  const y = parseInt(raw, 10);
+  return Number.isNaN(y) ? 0 : new Date(y, 0, 1).getTime();
+}
+
+/** All projects from content/projects/*.mdx (metadata only, no body), newest first. */
 export async function getProjects(): Promise<Project[]> {
   const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
   const mdxFiles = entries
@@ -91,6 +102,7 @@ export async function getProjects(): Promise<Project[]> {
     const { data } = matter(raw);
     projects.push(parseFrontmatter(base, data as Frontmatter));
   }
+  projects.sort((a, b) => projectSortKey(b) - projectSortKey(a));
   return projects;
 }
 
