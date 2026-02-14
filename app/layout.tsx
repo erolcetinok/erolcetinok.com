@@ -17,7 +17,8 @@ const themeScript = `
 (function(){
   try {
     var t = localStorage.getItem('theme');
-    var isDark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var useSystem = !t || t === 'system';
+    var isDark = t === 'dark' || (useSystem && window.matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dark', isDark);
   } catch (e) {}
 })();
