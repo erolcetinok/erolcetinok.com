@@ -24,8 +24,9 @@ export default async function ProjectsPage({ searchParams }: Props) {
       <header className="projects-header">
         <h1 className="projects-title">Projects</h1>
         <p className="projects-intro">
-          I do projects to expand my knowledge and gain new skills. Here are
-          some of the things I&apos;ve built and learned from.
+          My projects originates from identifying gaps in the world, 
+          in my knowledge, and in my skills. I build to fill those gaps and to learn new things.
+          Here are some of the things I&apos;ve built and learned from!
         </p>
       </header>
 

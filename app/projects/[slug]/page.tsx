@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getProjectBySlug, getProjects } from "@/lib/projects";
+import { formatPublishedDate, getProjectBySlug, getProjects } from "@/lib/projects";
 import { mdxComponents } from "@/components/mdx";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -23,7 +23,7 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) notFound();
 
-  const publishedLabel = project.date || project.year || "—";
+  const publishedLabel = formatPublishedDate(project);
 
   return (
     <article className="project-detail">

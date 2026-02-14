@@ -108,6 +108,26 @@ export async function getProjectBySlug(
   }
 }
 
+/**
+ * Format project published date for display. Prefers full date (YYYY-MM-DD) → "Month Day, Year";
+ * falls back to year string, then "—".
+ */
+export function formatPublishedDate(project: Project): string {
+  const raw = project.date ?? project.year ?? "";
+  if (!raw) return "—";
+  const iso = raw.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+    const d = new Date(iso + "T12:00:00");
+    if (!Number.isNaN(d.getTime()))
+      return d.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+  }
+  return raw;
+}
+
 /** Projects that include the given category; pass undefined for all. */
 export async function getProjectsByCategory(
   category: string | undefined
