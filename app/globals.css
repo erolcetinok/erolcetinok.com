@@ -206,6 +206,7 @@ small,
   z-index: 10000;
 }
 
+/* Same max-width and horizontal padding as .page so hamburger/theme align with content edges */
 .site-header__inner {
   width: 100%;
   max-width: var(--max-width);
@@ -216,22 +217,26 @@ small,
 
 .site-header__inner--three {
   display: grid;
-  grid-template-columns: 1fr minmax(0, auto) 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   justify-items: center;
   gap: 12px;
 }
 
+/* Hamburger at content start (left edge of content) */
 .site-header__inner--three > .header-icon-btn:first-child {
   justify-self: start;
+  margin-left: 0;
 }
 
 .site-header__inner--three > .header-center {
   justify-self: center;
 }
 
+/* Theme toggle at content end (right edge of content) */
 .site-header__inner--three > .header-icon-btn:last-child {
   justify-self: end;
+  margin-right: 0;
 }
 
 .header-center {
