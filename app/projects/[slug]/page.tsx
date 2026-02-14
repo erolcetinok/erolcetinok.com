@@ -28,7 +28,12 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <article className="project-detail">
       <Link href="/projects" className="project-detail__back">
-        ← Projects
+        <span className="project-detail__back-icon" aria-hidden>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </span>
+        Projects
       </Link>
       <header className="project-detail__header">
         <h1 className="project-detail__title">{project.title}</h1>

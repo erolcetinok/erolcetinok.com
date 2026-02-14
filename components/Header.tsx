@@ -127,7 +127,18 @@ export default function Header({ className }: { className?: string }) {
             {!isHome && currentNavItem && (
               <>
                 <span className="header-center__divider" aria-hidden>/</span>
-                <span className="header-center__section">{currentNavItem.label}</span>
+                <Link
+                  href={currentNavItem.href}
+                  className="header-center__section"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    if (pathname === currentNavItem.href) {
+                      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    }
+                  }}
+                >
+                  {currentNavItem.label}
+                </Link>
               </>
             )}
           </div>
