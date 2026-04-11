@@ -6,6 +6,7 @@
 export const MENU_NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
+  { href: "/reading", label: "Reading" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
