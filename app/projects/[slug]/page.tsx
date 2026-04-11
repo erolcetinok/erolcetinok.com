@@ -57,18 +57,7 @@ export default async function ProjectPage({ params }: Props) {
               </span>
             </>
           )}
-          {project.tags.length > 0 && (
-            <>
-              <span className="project-detail__meta-label">Tags</span>
-              <span className="project-detail__meta-value project-detail__meta-tags">
-                {project.tags.join(", ")}
-              </span>
-            </>
-          )}
         </div>
-        {project.description && (
-          <p className="project-detail__description">{project.description}</p>
-        )}
       </header>
       {project.image && (
         <div className="project-detail__image-wrap">

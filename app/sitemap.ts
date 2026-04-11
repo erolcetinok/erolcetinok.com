@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getBooks } from "@/lib/reading";
 import { getProjects } from "@/lib/projects";
 
 const PRODUCTION_URL = "https://erolcetinok.com";
@@ -12,6 +13,7 @@ function getBaseUrl(): string {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl();
   const projects = await getProjects();
+  const books = await getBooks();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: base, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
@@ -27,5 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const readingRoutes: MetadataRoute.Sitemap = books.map((b) => ({
+    url: `${base}/reading/${b.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...readingRoutes];
 }

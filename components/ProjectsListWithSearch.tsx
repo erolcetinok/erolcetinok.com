@@ -59,7 +59,7 @@ export function ProjectsListWithSearch({ projects, allProjects }: Props) {
                     width={320}
                     height={320}
                     className="project-card__image"
-                    sizes="(max-width: 520px) 120px, 160px"
+                    sizes="(max-width: 520px) 108px, 140px"
                   />
                 </span>
               ) : (
