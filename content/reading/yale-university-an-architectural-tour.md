@@ -1,7 +1,7 @@
 ---
 title: "Yale University: An Architectural Tour (The Campus Guide)"
 authors:
-  - Paul V. Turner
+  - Patrick L. Pinnell
 year: "2026-04-12"
 publishedYear: "2012"
 cover: "/reading/yale-university-an-architectural-tour.jpg"
