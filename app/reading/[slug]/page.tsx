@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { formatReadDate, getBookBySlug, getBooks } from "@/lib/reading";
@@ -71,15 +70,14 @@ export default async function ReadingDetailPage({ params }: Props) {
         >
           {coverSrc ? (
             <div className="reading-plate__cover-wrap">
-              <Image
+              {/* Native img so each cover keeps its photo’s aspect ratio (no fixed 2:3 crop). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={coverSrc}
                 alt=""
-                width={320}
-                height={480}
                 className="reading-plate__cover"
-                sizes="(max-width: 640px) 36vw, 160px"
-                priority
-                unoptimized={coverSrc.endsWith(".svg")}
+                loading="eager"
+                decoding="async"
               />
             </div>
           ) : null}

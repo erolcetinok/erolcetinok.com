@@ -1484,8 +1484,8 @@ html.dark .project-tag {
 
 .reading-plate__cover-wrap {
   flex-shrink: 0;
-  width: 160px;
-  max-width: 42%;
+  width: fit-content;
+  max-width: min(220px, 42vw);
   border-radius: var(--radius-bevel);
   overflow: hidden;
   background: color-mix(in srgb, var(--foreground) 6%, var(--background));
@@ -1494,17 +1494,15 @@ html.dark .project-tag {
 
 @media (max-width: 520px) {
   .reading-plate__cover-wrap {
-    max-width: 140px;
+    max-width: min(200px, 85vw);
   }
 }
 
 .reading-plate__cover {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  object-position: center top;
 }
 
 .reading-plate__credits {

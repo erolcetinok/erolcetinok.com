@@ -1,7 +1,7 @@
 /**
- * Books are loaded from content/reading/*.md.
- * Frontmatter: title, description, year (finished on), authors, optional cover, image, publishedYear.
- * - cover: book cover for the article plate (2:3); falls back to image if cover omitted.
+ * Books are loaded from content/reading/*.md (filename = URL slug: use letters, numbers, hyphens — no `&` or spaces).
+a * Frontmatter: title, description, year (finished on), authors, optional cover, image, publishedYear.
+ * - cover: book cover for the article plate (natural aspect ratio; max width capped in CSS); falls back to image if cover omitted.
  * - year: when you finished. Use YYYY-MM-DD for the detail page (long date); list cards show the year only, like project cards.
  * - publishedYear: original publication date/year (shown next to cover; exact date can go in the body).
  * Optional: link, linkLabel. Body = Markdown on the detail page.
@@ -92,35 +92,60 @@ function parseFrontmatter(slug: string, data: Frontmatter): Book {
   };
 }
 
+/** Parse YYYY-MM-DD or loose YYYY-M-D (e.g. 2026-4-1) for finished-on dates. */
+function parseReadDateInput(raw: string): Date | null {
+  const s = raw.trim();
+  if (!s) return null;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    const d = new Date(s + "T12:00:00");
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  const loose = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (loose) {
+    const y = parseInt(loose[1], 10);
+    const mo = parseInt(loose[2], 10) - 1;
+    const da = parseInt(loose[3], 10);
+    const d = new Date(y, mo, da, 12, 0, 0, 0);
+    if (
+      !Number.isNaN(d.getTime()) &&
+      d.getFullYear() === y &&
+      d.getMonth() === mo &&
+      d.getDate() === da
+    ) {
+      return d;
+    }
+  }
+  return null;
+}
+
 /**
- * Format `year` for the **detail page**: YYYY-MM-DD → "December 31, 2026";
+ * Format `year` for the **detail page**: ISO-like dates → "April 1, 2026";
  * plain year or other text is returned as-is (trimmed).
  */
 export function formatReadDate(raw: string | undefined): string {
   if (!raw?.trim()) return "—";
-  const iso = raw.trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
-    const d = new Date(iso + "T12:00:00");
-    if (!Number.isNaN(d.getTime())) {
-      return d.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    }
+  const s = raw.trim();
+  const d = parseReadDateInput(s);
+  if (d) {
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   }
-  return iso;
+  return s;
 }
 
 /**
- * Year only for **list cards** (same idea as project cards): ISO date → calendar year;
+ * Year only for **list cards** (same idea as project cards): date → calendar year;
  * four-digit year → unchanged.
  */
 export function formatReadYearCard(raw: string | undefined): string {
   if (!raw?.trim()) return "";
   const s = raw.trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
-    return s.slice(0, 4);
+  const d = parseReadDateInput(s);
+  if (d) {
+    return String(d.getFullYear());
   }
   if (/^\d{4}$/.test(s)) {
     return s;
@@ -134,9 +159,9 @@ export function formatReadYearCard(raw: string | undefined): string {
 
 function bookSortKey(b: Book): number {
   const raw = b.year.trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    const t = new Date(raw + "T12:00:00").getTime();
-    return Number.isNaN(t) ? 0 : t;
+  const d = parseReadDateInput(raw);
+  if (d) {
+    return d.getTime();
   }
   const y = parseInt(raw, 10);
   return Number.isNaN(y) ? 0 : new Date(y, 0, 1).getTime();
