@@ -4,9 +4,8 @@
  * Optional: date, link, linkLabel. Body = MDX write-up on the detail page.
  */
 
-import { readdir, readFile } from "node:fs/promises";
-import matter from "gray-matter";
 import { join } from "node:path";
+import { loadCollection, loadEntry } from "./content";
 
 const CONTENT_DIR = join(process.cwd(), "content", "projects");
 
@@ -92,16 +91,9 @@ function projectSortKey(p: Project): number {
 
 /** All projects from content/projects/*.mdx (metadata only, no body), newest first. */
 export async function getProjects(): Promise<Project[]> {
-  const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
-  const mdxFiles = entries
-    .filter((e) => e.isFile() && e.name.endsWith(".mdx"))
-    .map((e) => e.name.replace(/\.mdx$/, ""));
-  const projects: Project[] = [];
-  for (const base of mdxFiles) {
-    const raw = await readFile(join(CONTENT_DIR, `${base}.mdx`), "utf-8");
-    const { data } = matter(raw);
-    projects.push(parseFrontmatter(base, data as Frontmatter));
-  }
+  const projects = await loadCollection(CONTENT_DIR, ".mdx", (slug, data) =>
+    parseFrontmatter(slug, data as Frontmatter)
+  );
   projects.sort((a, b) => projectSortKey(b) - projectSortKey(a));
   return projects;
 }
@@ -110,14 +102,9 @@ export async function getProjects(): Promise<Project[]> {
 export async function getProjectBySlug(
   slug: string
 ): Promise<ProjectWithContent | null> {
-  try {
-    const raw = await readFile(join(CONTENT_DIR, `${slug}.mdx`), "utf-8");
-    const { data, content } = matter(raw);
-    const project = parseFrontmatter(slug, data as Frontmatter);
-    return { ...project, content: content.trim() };
-  } catch {
-    return null;
-  }
+  return loadEntry(CONTENT_DIR, ".mdx", slug, (s, data) =>
+    parseFrontmatter(s, data as Frontmatter)
+  );
 }
 
 /**

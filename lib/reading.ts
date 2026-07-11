@@ -1,15 +1,14 @@
 /**
  * Books are loaded from content/reading/*.md (filename = URL slug: use letters, numbers, hyphens — no `&` or spaces).
-a * Frontmatter: title, description, year (finished on), authors, optional cover, image, publishedYear.
+ * Frontmatter: title, description, year (finished on), authors, optional cover, image, publishedYear.
  * - cover: book cover for the article plate (natural aspect ratio; max width capped in CSS); falls back to image if cover omitted.
  * - year: when you finished. Use YYYY-MM-DD for the detail page (long date); list cards show the year only, like project cards.
  * - publishedYear: original publication date/year (shown next to cover; exact date can go in the body).
  * Optional: link, linkLabel. Body = Markdown on the detail page.
  */
 
-import { readdir, readFile } from "node:fs/promises";
-import matter from "gray-matter";
 import { join } from "node:path";
+import { loadCollection, loadEntry } from "./content";
 
 const CONTENT_DIR = join(process.cwd(), "content", "reading");
 
@@ -169,21 +168,9 @@ function bookSortKey(b: Book): number {
 
 /** All books from content/reading/*.md, newest year first. */
 export async function getBooks(): Promise<Book[]> {
-  let entries;
-  try {
-    entries = await readdir(CONTENT_DIR, { withFileTypes: true });
-  } catch {
-    return [];
-  }
-  const mdFiles = entries
-    .filter((e) => e.isFile() && e.name.endsWith(".md"))
-    .map((e) => e.name.replace(/\.md$/, ""));
-  const books: Book[] = [];
-  for (const base of mdFiles) {
-    const raw = await readFile(join(CONTENT_DIR, `${base}.md`), "utf-8");
-    const { data } = matter(raw);
-    books.push(parseFrontmatter(base, data as Frontmatter));
-  }
+  const books = await loadCollection(CONTENT_DIR, ".md", (slug, data) =>
+    parseFrontmatter(slug, data as Frontmatter)
+  );
   books.sort((a, b) => bookSortKey(b) - bookSortKey(a));
   return books;
 }
@@ -192,12 +179,7 @@ export async function getBooks(): Promise<Book[]> {
 export async function getBookBySlug(
   slug: string
 ): Promise<BookWithContent | null> {
-  try {
-    const raw = await readFile(join(CONTENT_DIR, `${slug}.md`), "utf-8");
-    const { data, content } = matter(raw);
-    const book = parseFrontmatter(slug, data as Frontmatter);
-    return { ...book, content: content.trim() };
-  } catch {
-    return null;
-  }
+  return loadEntry(CONTENT_DIR, ".md", slug, (s, data) =>
+    parseFrontmatter(s, data as Frontmatter)
+  );
 }
