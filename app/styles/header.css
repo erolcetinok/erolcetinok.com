@@ -1,0 +1,311 @@
+/* Header + mobile menu overlay. Loaded after globals.css (foundation). */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--background);
+  font-family: var(--font-sans);
+  width: 100%;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
+}
+
+.site-header--menu-open {
+  z-index: 10000;
+}
+
+/* Match .page total width (max-width + padding) so header content aligns with main content */
+.site-header__inner {
+  width: 100%;
+  max-width: calc(var(--max-width) + 2 * var(--page-padding));
+  margin: 0 auto;
+  padding: 12px var(--page-padding);
+  box-sizing: border-box;
+}
+
+.site-header__inner--three {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: 12px;
+}
+
+/* Shift hamburger left so its edge aligns with content start */
+.site-header__inner--three > .header-icon-btn:first-child {
+  justify-self: start;
+  margin-left: -0.5rem;
+}
+
+.site-header__inner--three > .header-center {
+  justify-self: center;
+}
+
+/* Shift theme toggle right so its edge aligns with content end */
+.site-header__inner--three > .header-icon-btn:last-child {
+  justify-self: end;
+  margin-right: -0.5rem;
+}
+
+.header-center {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.header-center__name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--text-color-primary);
+}
+
+.header-center__name:hover {
+  opacity: 0.85;
+}
+
+.header-center__divider {
+  color: var(--text-color-tertiary);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.header-center__section {
+  font-size: 1.125rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+}
+
+.header-center__section:hover {
+  opacity: 0.85;
+}
+
+.header-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.header-icon-btn:hover {
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.header-icon-btn .hamburger-line {
+  display: none;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.header-icon-btn--menu {
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.header-icon-btn--menu .hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.header-icon-btn--menu.is-menu-open .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.header-icon-btn:first-child svg {
+  display: none;
+}
+
+.theme-toggle-icons {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.theme-toggle-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, transform 0.55s ease;
+}
+
+.theme-toggle-icon--sun {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.theme-toggle-icon--moon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+html.dark .theme-toggle-icon--sun {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+html.dark .theme-toggle-icon--moon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* ==========================================================================
+   Menu overlay
+   ========================================================================== */
+
+@keyframes menu-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes menu-overlay-content-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100%;
+  z-index: 9999;
+  background: var(--background);
+  color: var(--text-color-primary);
+  font-family: var(--font-sans);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  animation: menu-overlay-in 0.2s ease-out;
+  transition: background-color 0.55s ease-out, color 0.55s ease-out, border-color 0.55s ease-out;
+}
+
+.menu-overlay__inner {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 88px var(--page-padding) 48px;
+  padding-left: calc(var(--page-padding) - 0.75rem); /* nav links and icons aligned, shifted left */
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  animation: menu-overlay-content-in 0.25s ease-out 0.05s both;
+}
+
+.menu-overlay__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.menu-overlay__nav a {
+  display: block;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.menu-overlay .menu-overlay__nav .menu-overlay__link {
+  font-size: 1.75rem;
+}
+
+.menu-overlay__link {
+  display: block;
+  padding: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--social-icon-color);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+}
+
+.menu-overlay__link:hover,
+.menu-overlay__link.is-active {
+  color: var(--foreground);
+}
+
+.menu-overlay__social {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-left: 0.25rem;
+}
+
+.menu-overlay .menu-overlay__inner .menu-overlay__social {
+  gap: 0.75rem !important;
+}
+
+.menu-overlay__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  color: var(--social-icon-color);
+  text-decoration: none;
+  border-radius: var(--radius-bevel);
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.menu-overlay__social-link:hover {
+  color: var(--foreground);
+  opacity: 0.9;
+}
+
+.menu-overlay__social-link svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}

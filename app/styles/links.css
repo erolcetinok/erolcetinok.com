@@ -1,0 +1,54 @@
+/* Link styles (base anchor, animated underline, .link-body). */
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-color: var(--text-color-tertiary);
+  text-underline-offset: 3px;
+  transition: color 150ms ease, opacity 150ms ease, text-decoration-color 150ms ease;
+}
+
+a:hover {
+  opacity: 0.85;
+  text-decoration-color: currentColor;
+}
+
+p a,
+li a {
+  position: relative;
+  text-decoration: none;
+}
+
+
+p a::after,
+li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+p a:hover::after,
+li a:hover::after {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.link-body {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--text-color-tertiary);
+  text-underline-offset: 2px;
+}
+
+.link-body:hover {
+  color: var(--text-color-primary);
+  text-decoration-color: currentColor;
+}

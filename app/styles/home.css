@@ -1,0 +1,124 @@
+/* Home hero (headshot, name, tagline, social row). */
+
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+}
+
+@media (min-width: 520px) {
+  .home-hero {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.home-hero__photo {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-bevel);
+  overflow: hidden;
+  background: var(--background);
+}
+
+@media (min-width: 520px) {
+  .home-hero__photo {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.home-hero__photoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-hero__content {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+@media (min-width: 520px) {
+  .home-hero__content {
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.home-hero__name {
+  margin: 0 0 0.25rem 0;
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+}
+
+@media (min-width: 520px) {
+  .home-hero__name {
+    font-size: clamp(2.25rem, 4vw, 2.75rem);
+  }
+}
+
+.home-hero__name-line {
+  display: block;
+}
+
+.home-hero__tagline {
+  margin: 0 0 1rem 0;
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-color-secondary);
+  line-height: 1.45;
+}
+
+@media (min-width: 520px) {
+  .home-hero__tagline {
+    font-size: 1.25rem;
+  }
+}
+
+.home-hero__social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 520px) {
+  .home-hero__social {
+    justify-content: flex-start;
+  }
+}
+
+.home-hero__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--social-icon-color);
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.home-hero__social-link:hover {
+  color: var(--foreground);
+  opacity: 0.9;
+}
+
+.home-hero__social-link svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+}

@@ -1,0 +1,208 @@
+/* Reading index (book cards) + reading detail plate (cover/credits). */
+
+.reading-list li a.reading-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.reading-list li a.reading-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+.reading-list li a.reading-card:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+}
+
+/* Reading list: full width like projects; compact vertical footprint */
+.reading-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.reading-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.reading-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--background);
+  border: 2px solid color-mix(in srgb, var(--foreground) 22%, var(--background));
+  border-radius: var(--radius-bevel);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.reading-card:hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  border-color: color-mix(in srgb, var(--foreground) 35%, var(--background));
+}
+
+.reading-card__top {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+/* Card title: match .project-card__title */
+.reading-card__title {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-color-primary);
+  margin: 0;
+  padding: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Year only on card (detail page uses full date): match .project-card__year */
+.reading-card__year {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-color-tertiary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Card blurb only (authors on detail page): match .project-card__description (single line) */
+.reading-card__meta {
+  margin: 0;
+  padding: 0;
+  display: block;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.reading-card__impression {
+  display: block;
+  color: var(--text-color-secondary);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reading-empty {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-color-secondary);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.reading-empty__code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--foreground) 8%, var(--background));
+  color: var(--text-color-primary);
+}
+
+/* Reading detail: cover + author + publication (aligned with project-detail meta typography) */
+.reading-plate {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin: 0 0 2rem 0;
+}
+
+@media (max-width: 520px) {
+  .reading-plate {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.reading-plate--no-cover {
+  padding-top: 0.25rem;
+}
+
+.reading-plate__cover-wrap {
+  flex-shrink: 0;
+  width: fit-content;
+  max-width: min(220px, 42vw);
+  border-radius: var(--radius-bevel);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, var(--background));
+}
+
+@media (max-width: 520px) {
+  .reading-plate__cover-wrap {
+    max-width: min(200px, 85vw);
+  }
+}
+
+.reading-plate__cover {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.reading-plate__credits {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  justify-content: center;
+  padding: 0.2rem 0 0 0;
+}
+
+.reading-plate--no-cover .reading-plate__credits {
+  padding-top: 0;
+}
+
+.reading-plate__byline {
+  font-size: 1.125rem;
+  line-height: 1.45;
+  color: var(--text-color-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.reading-plate__published {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.125rem 0.5rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  align-items: baseline;
+}
+
+.reading-plate__published-label {
+  color: var(--text-color-tertiary);
+}
+
+.reading-plate__published-value {
+  color: var(--text-color-primary);
+}
