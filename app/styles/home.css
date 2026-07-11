@@ -109,16 +109,23 @@
   align-items: center;
   justify-content: center;
   color: var(--social-icon-color);
-  transition: color 0.15s ease, opacity 0.15s ease;
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
+/* Icon buttons: brighten color only on hover. No opacity change — dropping
+   opacity below 1 promotes a compositing layer and the icon jitters. The
+   `opacity: 1` also overrides the global `a:hover { opacity: 0.85 }`. */
 .home-hero__social-link:hover {
-  color: var(--foreground);
-  opacity: 0.9;
+  color: var(--social-icon-hover-color);
+  opacity: 1;
 }
 
 .home-hero__social-link svg {
   display: block;
   width: 32px;
   height: 32px;
+  /* GitHub octocat runs flush to its viewBox edge; let it paint past the
+     SVG box so the right edge isn't shaved by the default viewport clip. */
+  overflow: visible;
 }

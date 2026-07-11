@@ -243,12 +243,6 @@ html.dark .projects-search__input:focus {
   outline-offset: 2px;
 }
 
-/* Remove global li a::after underline from card (keeps card border, no white line) */
-.projects-list li a.project-card::after {
-  content: none !important;
-  display: none !important;
-}
-
 .project-card__top {
   display: flex;
   flex-wrap: wrap;

@@ -279,7 +279,13 @@ html.dark .theme-toggle-icon--moon {
   flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 1.25rem;
-  padding-left: 0.25rem;
+  /* Align the LinkedIn mark with the visible start of the nav glyphs. Drop the
+     row's indent, then: -4px cancels the icon's centering inside its 36px hit
+     area ((28 - 36) / 2), and +2px nudges right to the bold caps' left
+     side-bearing so the mark lines up with the letter, not the text box.
+     Hit areas stay 36px. */
+  padding-left: 0;
+  margin-left: calc((28px - 36px) / 2 + 2px);
 }
 
 .menu-overlay .menu-overlay__inner .menu-overlay__social {
@@ -296,16 +302,19 @@ html.dark .theme-toggle-icon--moon {
   color: var(--social-icon-color);
   text-decoration: none;
   border-radius: var(--radius-bevel);
-  transition: color 0.15s ease, opacity 0.15s ease;
+  transition: color 0.15s ease;
 }
 
+/* Match the home hero icons: color-only hover, opacity held at 1 (no
+   compositing-layer jitter; overrides the global a:hover opacity dim). */
 .menu-overlay__social-link:hover {
-  color: var(--foreground);
-  opacity: 0.9;
+  color: var(--social-icon-hover-color);
+  opacity: 1;
 }
 
 .menu-overlay__social-link svg {
   display: block;
   width: 28px;
   height: 28px;
+  overflow: visible;
 }

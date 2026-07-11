@@ -26,7 +26,7 @@
   --background-color-primary: #ffffff;
   --border-color-primary: rgba(0, 0, 0, 0.12);
   --border-color-secondary: rgba(0, 0, 0, 0.09);
-  --link-color: #0066cc;
+  --link-color: var(--text-color-primary);
   --scrollbar-color: var(--color-neutral-300);
 
   --background: var(--background-color-main);
@@ -40,6 +40,8 @@
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --social-icon-color: var(--color-neutral-500);
+  /* Opaque hover color so overlapping icon strokes don't compound on hover. */
+  --social-icon-hover-color: var(--color-neutral-900);
 
   /* Text selection (light mode: dark highlight, light text – opposite of dark mode) */
   --selection-bg: #2e362f;
@@ -54,13 +56,18 @@ html.dark {
   --background-color-primary: #000000;
   --border-color-primary: rgba(255, 255, 255, 0.12);
   --border-color-secondary: rgba(255, 255, 255, 0.09);
-  --link-color: #60a5fa;
+  --link-color: var(--text-color-primary);
   --scrollbar-color: var(--color-neutral-600);
 
   --background: var(--background-color-main);
   --foreground: var(--text-color-primary);
   --border-color: var(--border-color-primary);
-  --social-icon-color: rgba(255, 255, 255, 0.45);
+  /* Opaque (equals rgba(255,255,255,0.45) on #000) so overlapping icon strokes
+     can't compound into a brighter seam — e.g. the email envelope. Hover is
+     opaque too (--foreground is rgba(.9), which would seam again on hover).
+     neutral-200 ≈ rgba(255,255,255,0.9) on #000, so hover brightness is kept. */
+  --social-icon-color: var(--color-neutral-500);
+  --social-icon-hover-color: var(--color-neutral-200);
 
   /* Text selection (dark mode: light highlight, dark text) */
   --selection-bg: #babbc5;
@@ -206,4 +213,3 @@ small,
 @import "./styles/projects.css";
 @import "./styles/reading.css";
 @import "./styles/project-detail.css";
-@import "./styles/components.css";

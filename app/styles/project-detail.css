@@ -184,7 +184,7 @@
   font-size: 0.9em;
   padding: 0.15em 0.4em;
   background: color-mix(in srgb, var(--foreground) 8%, var(--background));
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .project-detail__markdown pre {
