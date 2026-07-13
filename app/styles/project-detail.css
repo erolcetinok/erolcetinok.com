@@ -241,3 +241,35 @@
   font-style: italic;
   margin: 0;
 }
+
+/* Captioned images inside project/reading MDX bodies (<Figure>) */
+.project-detail__figure {
+  margin: 1.75rem 0;
+}
+
+.project-detail__figure-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-bevel);
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--background));
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+}
+
+.project-detail__figure-caption {
+  margin: 0.6rem 0 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-color-tertiary);
+  text-align: center;
+}
+
+/* Bare markdown images (no caption) get the same treatment */
+.project-detail__markdown img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.75rem 0;
+  border-radius: var(--radius-bevel);
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--background));
+}

@@ -11,14 +11,13 @@ export default async function ReadingPage() {
   const books = await getBooks();
 
   return (
-    <section className="projects-page">
+    <section className="reading-page">
       <header className="projects-header">
         <h1 className="projects-title">Reading</h1>
         <p className="projects-intro">
           Here are the books that I&apos;ve read and my thoughts on them.
         </p>
       </header>
-
       <ReadingList books={books} />
     </section>
   );

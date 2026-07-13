@@ -5,7 +5,7 @@ authors:
 year: "2026-04-12"
 publishedYear: "2012"
 cover: "/reading/yale-university-an-architectural-tour.jpg"
-description: "Explores the history behind each building on the Yale campus"
+description: "A building-by-building history of the Yale campus."
 ---
 
-This book was gifted to me by my dad. It is definitely a great read, especially considering this is where I will be spending the next four years
+A gift from my dad, and a great read. A building-by-building history of the Yale campus, made all the more meaningful since it is where I will be spending the next four years.

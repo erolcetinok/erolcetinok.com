@@ -22,10 +22,10 @@ export default async function ReadingDetailPage({ params }: Props) {
 
   if (!book) notFound();
 
-  const coverSrc = book.cover ?? book.image;
-  const hasCredits =
-    book.authors.length > 0 || Boolean(book.publishedYear?.trim());
-  const showBookPlate = Boolean(coverSrc) || hasCredits;
+  const coverSrc = book.cover ?? book.image ?? "/reading/placeholder-cover.svg";
+  const byline = [book.authors.join(", "), book.publishedYear]
+    .filter((part) => Boolean(part && part.trim()))
+    .join(" · ");
 
   return (
     <article className="project-detail">
@@ -37,77 +37,47 @@ export default async function ReadingDetailPage({ params }: Props) {
         </span>
         Reading
       </Link>
-      <header className="project-detail__header">
-        <h1 className="project-detail__title">{book.title}</h1>
-        <div className="project-detail__meta-grid">
-          <span className="project-detail__meta-label">Finished on</span>
-          <span className="project-detail__meta-value">
-            {formatReadDate(book.year)}
-          </span>
-          {book.link && (
-            <>
-              <span className="project-detail__meta-label">
-                {book.linkLabel ?? "Link"}
-              </span>
-              <span className="project-detail__meta-value">
-                <a
-                  href={book.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-detail__meta-link"
-                >
-                  {book.linkLabel ?? "Link"}
-                </a>
-              </span>
-            </>
-          )}
+      <div className="reading-book">
+        <div className="reading-book__cover-wrap">
+          {/* Native img so the cover keeps its natural aspect ratio (no fixed crop). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={coverSrc}
+            alt=""
+            className="reading-book__cover"
+            loading="eager"
+            decoding="async"
+          />
         </div>
-      </header>
-      {showBookPlate && (
-        <aside
-          className={`reading-plate${coverSrc ? "" : " reading-plate--no-cover"}`}
-          aria-label="Book"
-        >
-          {coverSrc ? (
-            <div className="reading-plate__cover-wrap">
-              {/* Native img so each cover keeps its photo’s aspect ratio (no fixed 2:3 crop). */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={coverSrc}
-                alt=""
-                className="reading-plate__cover"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
+        <div className="reading-book__info">
+          <h1 className="reading-book__title">{book.title}</h1>
+          {byline ? <p className="reading-book__byline">{byline}</p> : null}
+          {book.year?.trim() ? (
+            <p className="reading-book__finished">
+              Finished {formatReadDate(book.year)}
+            </p>
           ) : null}
-          {hasCredits ? (
-            <div className="reading-plate__credits">
-              {book.authors.length > 0 ? (
-                <p className="reading-plate__byline">{book.authors.join(", ")}</p>
-              ) : null}
-              {book.publishedYear ? (
-                <p className="reading-plate__published">
-                  <span className="reading-plate__published-label">Published</span>
-                  <span className="reading-plate__published-value">
-                    {book.publishedYear}
-                  </span>
-                </p>
-              ) : null}
-            </div>
-          ) : null}
-        </aside>
-      )}
-      <div className="project-detail__content">
-        {book.content ? (
-          <div className="project-detail__markdown">
-            <MDXRemote source={book.content} components={mdxComponents} />
+          <hr className="reading-book__rule" />
+          <div className="reading-book__summary">
+            {book.content ? (
+              <MDXRemote source={book.content} components={mdxComponents} />
+            ) : (
+              <p>{book.description}</p>
+            )}
           </div>
-        ) : (
-          <p className="project-detail__placeholder">
-            Notes on this book coming soon.
-          </p>
-        )}
+          {book.link ? (
+            <p className="reading-book__link-row">
+              <a
+                href={book.link}
+                target="_blank"
+                rel="noreferrer"
+                className="reading-book__link"
+              >
+                {book.linkLabel ?? "Link"}
+              </a>
+            </p>
+          ) : null}
+        </div>
       </div>
     </article>
   );

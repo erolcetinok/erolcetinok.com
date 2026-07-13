@@ -1,0 +1,138 @@
+FORMAT OF THE FILE PER ITEM:
+Title
+Author
+Date I Read it
+My short thoughts
+
+A Walk In the Park
+Kevin Fedarko
+September 2024
+This was a very interesting book about the history of the Grand Canyon as well as the strenuous nature of through hiking for the average Joe. Inspiring and fascinating to say the least
+
+Elon Musk
+Walter Isaacson
+Mid 2025
+Gave some great insight into the behind the scenes life of the mercurial CEO Elon Musk, learned some things aobut what I want to be like in the workplace and some things I certainly do not want to be like
+
+Steve Jobs
+Walter Isaacson
+June 29, 2026
+Fascinating to learn about the whole life of Steve Jobs, especially him growing up win the Bay Area as he grew up in the exact same neighborhood that I do, Gave me some hope for what could be down the road if I put my mind to it
+
+Royal Robbins
+David Smart
+June 2024
+Fascinating to learn about the enigmatic existence of one of the world's most famous climbers
+
+Wright Brothers
+David McCullough
+August 2025
+Cool insight into the original makers of 20th century, those who Mae the first functional flying machine. The original scrappy makers of the world those who inspired many
+
+On The Road
+Jack Kerouac
+August 2025
+Insight into a different lifestyle that defined the Beat generation in the 50s and onwards. Definitely made me believe that I do not want too subscribe to the Beat life style
+
+Dharma Bums
+JAck Kerouac 
+October 2025
+Again asserted that I do not want to be a member of the Beat generation, but definitely asserted the fascinating nature of Jack Kerouac's prose and style of writing
+
+Big Sur
+Jack Kerouac
+February 2026
+Certainly one of Jack Keroauc's books that asserts his internal struggle, cool to here it talk about areas close to where I live
+
+Higher Education: A Big Wall Manual
+Andy Kirkpatrick
+May 2024
+A technical deep dive into big wall aid climbing. Knowledge that I hope to utilize one day
+
+Hooking Up - The Ultimate Big Wall and Aid Climbing Manual
+Fabio Elli & Peter Zobrak
+April 2024
+Again, another technical deep dive into big wall aid climbing, the graphics were great, highly recommend
+
+2001 Space Odyssey
+Arthur C. Clarke
+February 2022
+My favorite Sci-Fi book and movie that never ceases to amaze me. 
+
+Turing's Vision, Birth of CS
+Chris Bernhardt
+March 2026
+A great insight into Turing's ground breaking work, and a first hand insight into his genius
+
+Alexander Hamilton
+Ron Chernow
+December 2015
+A book that I bought when I saw Hamilton on Broadway in 2015, A fascinating story of the American immigrant turned founding father
+
+The Inoovators
+Walter Isaacson
+July 25 2026
+Have you ever been interested in how the status quo and the computer and AI age came to be? Then look no further than this book by Walter Isaacson From Ada Lovelace to google, it reinforced the  astounding people that brought us to where we are today
+
+Skunk Works: A Personal Memoir of My Years at Lockheed
+Ben R. Rich
+July 2024
+Insight into how to foster hyper innovation in a covert setting, Silicon Valley is where innovation happens, waht about Skunkworks?!
+
+What I talk about when I talk about running
+Haruki Murakami 
+September 2025
+I read this book leading up my college admissions process as I contemplated writing aobut running, alas I did not, but it gave me some new ideas on what to think about when I run. Insight into the depth of Murakami's thought process and brain.
+
+A Wild Sheep Chase
+Haruki Murakami
+June 2025
+Embrace the absurd, a particular useful message from thsi book that I internalized during my the stressful time the college admissions process
+
+In Pursuit of the Traveling Salesman 
+William J. Cook
+December 2025
+If you like traveling and route planning this is the book for you! Just kidding, this book gives insight into the iconic traveling salesman rpboelm and the unique minds and methods with the aim to solve it
+
+Epic of Gilgamesh
+February 2025
+So you want to read the first book, ever. Read this, the story is less important than the fascinating way this indicates human creativity and curiosity dating back to the very beginning of history.
+
+A Walk int he woods
+Bill Bryson
+January 2026
+You want to go for a walk? Walk the Appalachian trail maybe, this satirical book about walking the Appalachian trail and a Bryson's relationship with outdoors is somewhat light hearted must read
+
+Prepare to Win
+Carroll Smith
+November 2025
+I wanted to build a race car and I thought this was a great place to start. It is a dense and fact filled book about everything needed, and the stupid dos and don't to build and maintain a car. Maybe in the future I will build one
+
+Night 
+Elie Wiesel
+October 2024
+Brutal book, a hard read yet a necessary one, the human experience and suffering of the holocaust, never forget and never repeat
+
+Can't Hurt Me 
+David Goggins
+October 2025
+Another itnerstering perspective into mentality and hard work, draw some inspiration form thsi book about David Goggin's transformation into one of the msot disciplined people on earth
+
+American Prometheus
+Kai Bird
+August 2025
+Insight into the genius of Oppenheimer, his nuances, his quirks, and all that enabled him to lead the project that created the most deadly weapon known to humankind.
+
+Surviving to Drive
+Günther Steiner
+March 2024
+Well, an insight into the day of the life of the meme of Gunther Steiner, insight into the intense of what It means to be an F1 team principal
+
+Ataturks Discourse
+Mustafa Gazi Kemal
+December 2023
+A must read for anyone with Turkish descent, a fascinating historical recount of Atuturks experience forming theturkismh Republic
+
+The Little Prince
+2015
+My favorite book of all time, a story about maintaining one's hildike nature and curiosity.

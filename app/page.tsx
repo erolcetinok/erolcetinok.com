@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SocialLinks } from "@/components/SocialLinks";
+import headshot from "@/public/headshot.png";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
       <section className="home-hero">
         <div className="home-hero__photo">
           <Image
-            src="/headshot.png"
+            src={headshot}
             alt="Photo of Erol Cetinok"
             width={320}
             height={320}

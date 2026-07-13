@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { formatReadYearCard, type Book } from "@/lib/reading";
+import { type Book } from "@/lib/reading";
 
 type Props = {
   books: Book[];
 };
+
+const FALLBACK_COVER = "/reading/placeholder-cover.svg";
 
 export function ReadingList({ books }: Props) {
   if (books.length === 0) {
@@ -21,34 +23,26 @@ export function ReadingList({ books }: Props) {
   }
 
   return (
-    <ul className="reading-list" aria-label="Books read">
+    <ul className="reading-gallery" aria-label="Books read">
       {books.map((book) => {
-        const hasDescription = Boolean(book.description?.trim());
-        const yearCard = formatReadYearCard(book.year);
+        const coverSrc = book.cover ?? book.image ?? FALLBACK_COVER;
 
         return (
-          <li key={book.slug}>
+          <li key={book.slug} className="reading-gallery__item">
             <Link
               href={`/reading/${book.slug}`}
-              className="reading-card"
+              className="reading-gallery__link"
               aria-label={`View book: ${book.title}`}
             >
-              <div className="reading-card__top">
-                <h2 className="reading-card__title">{book.title}</h2>
-                {yearCard ? (
-                  <span
-                    className="reading-card__year"
-                    aria-label={`Finished ${yearCard}`}
-                  >
-                    {yearCard}
-                  </span>
-                ) : null}
-              </div>
-              {hasDescription ? (
-                <p className="reading-card__meta">
-                  <span className="reading-card__impression">{book.description}</span>
-                </p>
-              ) : null}
+              {/* Native img so each cover keeps its natural aspect ratio (no fixed crop). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={coverSrc}
+                alt=""
+                className="reading-gallery__cover"
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
           </li>
         );
