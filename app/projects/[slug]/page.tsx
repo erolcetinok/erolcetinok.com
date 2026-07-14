@@ -42,9 +42,7 @@ export default async function ProjectPage({ params }: Props) {
           <span className="project-detail__meta-value">{publishedLabel}</span>
           {project.link && (
             <>
-              <span className="project-detail__meta-label">
-                {project.linkLabel ?? "Link"}
-              </span>
+              <span className="project-detail__meta-label">Link</span>
               <span className="project-detail__meta-value">
                 <a
                   href={project.link}
@@ -52,7 +50,7 @@ export default async function ProjectPage({ params }: Props) {
                   rel="noreferrer"
                   className="project-detail__meta-link"
                 >
-                  {project.linkLabel ?? "Link"}
+                  {project.linkLabel ?? project.link}
                 </a>
               </span>
             </>

@@ -1,15 +1,52 @@
 ---
 title: Radial Microspine Gripper
-description: A unique and gripper for omnidirectional grasping
+description: A scaled-down, omnidirectional microspine gripper inspired by NASA JPL's LEMUR 3.
 year: "2026"
-date: "2026-2-16"
-image: /projects/
+date: "2026-02-16"
+image: /projects/radial-microspine-gripper/hero.jpg
 categories:
-  - Mechanical
+  - mechanical
+  - robotics
 tags:
   - JPL
+  - Microspines
+  - Compliant Mechanisms
   - 3D Printing
   - Unconventional Manufacturing
 ---
 
-# COMING SOON!!!
+# From one direction to all of them
+
+In a lot of ways this project was a continuation of my [microspine wall-climbing robot](/projects/microspine-climbing-robot), but with one key difference.
+
+As much as I loved that climbing robot, it was essentially monodirectional. Its rollers could only be pulled one way, downward, and still hold onto the wall, which is exactly what you need for climbing but not much else. What makes this style of microspine gripper so fascinating is that it&apos;s omnidirectional: you can yank it up, down, left, or right and it holds its grip on the surface all the same. That single change opens the door from &quot;a robot that climbs&quot; to &quot;a hand that can grab onto almost anything rough.&quot;
+
+Like the climbing robot, this was inspired by JPL and Aaron Parness. It&apos;s a simplified, scaled-down take on the microspine grippers they built for their robot LEMUR 3.
+
+# How it works
+
+My version consists of 40 wires, each tipped with a fishing-hook microspine, arranged in a radial pattern around a central housing. Every wire runs back to a central plunger through its own extension spring.
+
+The mechanism is the clever part. You set the housing against the surface and pull the plunger inward, which drags all 40 wires inward at once. As they move, each hook catches on whatever asperity, the microscopic bumps and pits in the surface, happens to be in front of it. Because every wire has its own spring, the springs deform independently and irregularly, so the load gets shared across all of the microspines instead of hanging off whichever one caught first. No single hook has to hold everything, and that&apos;s what lets the whole thing grip in any direction.
+
+{/* IMAGE — CAD design of the radial gripper */}
+<Figure src="/projects/radial-microspine-gripper/1-cad.jpg" alt="CAD design of the radial microspine gripper" caption="The design in CAD, plunger, springs, and microspines arranged radially around the housing." size="medium" />
+
+# Building it
+
+I started by CADding the whole thing, the plunger, the springs, the microspines, and all of the little housings, then 3D-printed it and began assembly with an assortment of springs.
+
+The tedious part was the microspines themselves. Each one is the cut-off end of a fishing hook, superglued and sandwiched into its own housing, and then I had to connect all 40 of those to their wires by hand. It was slow, fiddly work, but genuinely rewarding to watch a mostly functional gripper, and with this many moving parts, &quot;mostly&quot; is doing some honest work, come together into something so close to a piece of hardware NASA has actually tested on a real robot.
+
+{/* IMAGES — assembly, then with the springs installed */}
+<Gallery>
+  <Figure src="/projects/radial-microspine-gripper/2-assembly.jpg" alt="The 3D-printed gripper parts during assembly" caption="The printed housing and radial arms coming together." />
+  <Figure src="/projects/radial-microspine-gripper/3-assembly-springs.jpg" alt="The gripper assembly with springs installed" caption="With the extension springs installed, each wire gets its own suspension." />
+</Gallery>
+
+# The result
+
+{/* IMAGE — the finished gripper */}
+<Figure src="/projects/radial-microspine-gripper/4-final.jpg" alt="The finished radial microspine gripper" caption="The finished radial microspine gripper." />
+
+This one was a great continuation of the climbing robot, and it gave me a lot of experience wrestling with the kind of problems that only show up in the real world and never in CAD. Getting 40 independently sprung microspines to actually share a load is a very different challenge on the bench than it is on a screen, and figuring that out was the whole point.

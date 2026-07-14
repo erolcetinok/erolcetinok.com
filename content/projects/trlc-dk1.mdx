@@ -1,0 +1,58 @@
+---
+title: Robot Learning — TRLC-DK1
+description: Exploring the intersection of physical robotics and AI on an open-source arm, from teleoperation to training my first imitation-learning policies.
+year: "2026"
+date: "2026-07-10"
+image: /projects/trlc-dk1/hero.jpg
+categories:
+  - robotics
+  - software
+tags:
+  - LeRobot
+  - Imitation Learning
+  - ACT
+  - SmolVLA
+  - Robot Arm
+link: https://www.robot-learning.co
+linkLabel: robot-learning.co
+---
+
+# The idea
+
+This is the project I&apos;m most excited about right now. In January 2026 I got my hands on a TRLC-DK1, an open-source robot arm from The Robot Learning Company, a YC-backed startup, built around Hugging Face&apos;s LeRobot ecosystem. I&apos;d been looking for a serious platform to start exploring the intersection I care about most, physical robotics and AI, and this was exactly the piece of hardware to do it on.
+
+# Learning to teleoperate
+
+I started where everyone should, with teleoperation. The DK1 is a leader-follower setup: you move a leader arm by hand and the follower mirrors it in real time. It sounds simple, but it&apos;s the foundation for everything else, both a way to understand the hardware and, more importantly, the way you collect demonstration data to train policies later.
+
+I spent my first weeks here, learning the mechanics of teleoperation and getting fluent with LeRobot&apos;s teleoperate and recording commands. I also went a level deeper than basic position control, moving to an impedance controller with gravity compensation for smoother, safer, more compliant motion, and eventually adding Cartesian control so I could drive the end-effector directly in space.
+
+{/* VIDEO — first teleoperation */}
+<Video src="/projects/trlc-dk1/teleop.mp4" poster="/projects/trlc-dk1/teleop-poster.jpg" muted loop size="medium" />
+
+# My first training run: ACT
+
+Teleoperation isn&apos;t just for driving the arm by hand, it&apos;s how you teach it. To collect a dataset, I teleoperated the DK1 to pick up a blue cube and place it into a cardboard box, over and over for about an hour, recording every episode. Then I trained my first real policy on it: an ACT model, or Action Chunking Transformer.
+
+ACT (introduced by Zhao et al. at Stanford, out of the ALOHA project) is a clever answer to a core problem in imitation learning. Instead of predicting the next single action at every timestep, ACT predicts a whole *chunk* of future actions at once. That shrinks the effective decision horizon by 20 to 50 times, which cuts down the compounding errors that plague step-by-step imitation and produces noticeably smoother, more consistent motion, all from as few as ~50 human demonstrations. Under the hood it&apos;s a conditional variational autoencoder wrapped around a transformer, learning the underlying &quot;style&quot; of the demonstrations rather than memorizing them.
+
+Since my laptop is for control and inference, not heavy training, I spun up a cloud GPU (an A10 on Lambda) for my first real training run, my first time renting compute to train a model from my own robot data.
+
+{/* IMAGES — the data-collection and training rig */}
+<Gallery>
+  <Figure src="/projects/trlc-dk1/1-training-setup.jpg" alt="The training and data-collection setup" caption="The data-collection setup for recording demonstrations." />
+  <Figure src="/projects/trlc-dk1/2-overhead-camera.jpg" alt="Building an overhead camera rig" caption="Building an overhead camera to capture each episode." />
+</Gallery>
+
+{/* VIDEO — the trained ACT policy running on the arm */}
+<Video src="/projects/trlc-dk1/act-working.mp4" poster="/projects/trlc-dk1/act-working-poster.jpg" muted loop size="medium" />
+
+# What&apos;s next this summer
+
+This is where I&apos;m spending my summer, and the roadmap goes well beyond a single ACT policy:
+
+- **Vision-language-action models with SmolVLA.** SmolVLA is a compact (450M-parameter) open VLA from Hugging Face that takes in camera views, the robot&apos;s state, and a natural-language instruction, then generates the actions to carry it out. The goal is a *language-conditioned* version of my task, telling the arm to &quot;pick the red block&quot; and having it do exactly that.
+- **A public dataset.** Cleaning up and publishing my recordings as a LeRobotDataset on the Hugging Face Hub, contributing back to the same community data pool these models are trained on.
+- **A sim-to-real experiment.** Training in MuJoCo and transferring to the real arm, where the interesting part isn&apos;t a perfect success rate but characterizing exactly where and why the reality gap shows up.
+
+More than any single result, what I want out of the summer is fluency in the modern robot-learning stack, from classical kinematics, through imitation learning, to vision-language-action models, on real hardware that I&apos;ve driven myself.

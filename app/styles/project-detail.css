@@ -229,6 +229,19 @@
   min-height: 200px;
 }
 
+/* Capped, centered video variants for clips that don't need the full width */
+.project-detail__media--medium {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-detail__media--small {
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .project-detail__embed {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -257,6 +270,52 @@
 }
 
 .project-detail__figure-caption {
+  margin: 0.6rem 0 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-color-tertiary);
+  text-align: center;
+}
+
+/* Capped, centered variants for shots that don't need the full column width */
+.project-detail__figure--medium {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-detail__figure--small {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Compact collage: a set of related shots side by side (<Gallery>) */
+.project-detail__gallery {
+  margin: 1.75rem 0;
+}
+
+.project-detail__gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  align-items: start;
+}
+
+/* Figures inside the collage: drop their own spacing and width cap, and
+   shrink captions to suit the smaller cells. */
+.project-detail__gallery-grid .project-detail__figure {
+  margin: 0;
+  max-width: none;
+}
+
+.project-detail__gallery-grid .project-detail__figure-caption {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.project-detail__gallery-caption {
   margin: 0.6rem 0 0 0;
   font-size: 0.8125rem;
   line-height: 1.5;

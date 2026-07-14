@@ -37,19 +37,19 @@ Those conversations shaped the entire project. They&apos;re why the kit assemble
 The hardware is deliberately minimal. RoboForAll runs on an ESP32 microcontroller paired with a TB6612FNG motor driver and two TT gear motors, all mounted to a chassis I designed in CAD and 3D-printed. That&apos;s the whole build. Every part is cheap, widely available, and easy to source, and the chassis prints on any hobbyist printer, so a school can replicate the entire kit for a fraction of the cost of a commercial one.
 
 {/* IMAGE — CAD render of the 3D-printed chassis */}
-<Figure src="/projects/low-cost-robotics-kit/1-cad.jpg" alt="CAD model of the RoboForAll chassis" caption="The chassis, designed in CAD to print on any hobbyist 3D printer." />
+<Figure src="/projects/low-cost-robotics-kit/1-cad.jpg" alt="CAD model of the RoboForAll chassis" caption="The chassis, designed in CAD to print on any hobbyist 3D printer." size="medium" />
 
 Keeping the parts count low was an intentional design choice as fewer components means faster assembly, fewer things to break, and a robot a nine-year-old can put together and understand end to end.
 
-{/* IMAGE — soldering / wiring the electronics */}
-<Figure src="/projects/low-cost-robotics-kit/2-soldering.jpg" alt="Soldering the RoboForAll electronics" caption="Wiring and soldering the electronics, the ESP32, motor driver, and motors." />
-
-{/* IMAGE — bench-testing the electronics before assembly */}
-<Figure src="/projects/low-cost-robotics-kit/3-electronics.jpg" alt="Bench-testing the RoboForAll electronics" caption="Bench-testing the electronics before dropping them into the chassis." />
+{/* IMAGES — the electronics build, side by side */}
+<Gallery>
+  <Figure src="/projects/low-cost-robotics-kit/2-soldering.jpg" alt="Soldering the RoboForAll electronics" caption="Wiring and soldering the electronics, the ESP32, motor driver, and motors." />
+  <Figure src="/projects/low-cost-robotics-kit/3-electronics.jpg" alt="Bench-testing the RoboForAll electronics" caption="Bench-testing the electronics before dropping them into the chassis." />
+</Gallery>
 
 # The platform
 
- built roboforall.org to be the other half of the project, a place where the teacher has every resource needed to assemble, troubleshoot and then teach with the robot.
+I built roboforall.org to be the other half of the project, a place where the teacher has every resource needed to assemble, troubleshoot and then teach with the robot.
 
 Students program the robot with Blockly, dragging blocks to create movement behaviors while picking up the real fundamentals underneath: programming logic, robot construction, and wiring. The site includes a Bluetooth-enabled Studio page that connects to the robot and pushes code straight to it, a multi-lesson curriculum written to drop directly into a classroom, a full parts list, and assembly, setup, and troubleshooting docs.
 
