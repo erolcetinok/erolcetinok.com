@@ -36,9 +36,20 @@ export function ResumeIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <rect x="1" y="1" width="34" height="34" rx="4" />
-      <g transform="translate(6, 6)">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" strokeWidth="2" />
-      </g>
+      <text
+        x="18"
+        y="18"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="17"
+        fontWeight="700"
+        fontFamily="var(--font-sans), sans-serif"
+        letterSpacing="0.5"
+        fill="currentColor"
+        stroke="none"
+      >
+        CV
+      </text>
     </svg>
   );
 }

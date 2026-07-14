@@ -129,3 +129,88 @@
      SVG box so the right edge isn't shaved by the default viewport clip. */
   overflow: visible;
 }
+
+/* Full-width bio blurb below the hero. */
+.home-bio {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 2.5rem auto 0 auto;
+  padding: 0 var(--page-padding);
+}
+
+.home-bio__text {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+@media (min-width: 520px) {
+  .home-bio__text {
+    text-align: left;
+  }
+}
+
+/* Featured projects — reuses the global .projects-list / .project-card
+   markup from projects.css; only the section header and CTA are local. */
+.home-featured {
+  margin-top: 3.5rem;
+}
+
+.home-featured__title {
+  margin: 0 0 1.25rem 0;
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-color-primary);
+}
+
+.home-featured__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  font-family: var(--font-sans);
+  color: var(--text-color-primary);
+  background: color-mix(in srgb, var(--foreground) 10%, var(--background));
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, var(--background));
+  border-radius: var(--radius-bevel);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.home-featured__more-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.home-featured__more-icon svg {
+  display: block;
+}
+
+.home-featured__more:hover {
+  background: color-mix(in srgb, var(--foreground) 16%, var(--background));
+  border-color: color-mix(in srgb, var(--foreground) 35%, var(--background));
+  opacity: 1;
+}
+
+html.dark .home-featured__more {
+  background: color-mix(in srgb, var(--foreground) 14%, var(--background));
+  border-color: color-mix(in srgb, var(--foreground) 28%, var(--background));
+}
+
+html.dark .home-featured__more:hover {
+  background: color-mix(in srgb, var(--foreground) 22%, var(--background));
+  border-color: color-mix(in srgb, var(--foreground) 40%, var(--background));
+}
