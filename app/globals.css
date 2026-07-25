@@ -105,6 +105,8 @@ html.dark {
 }
 
 html {
+  /* Render everything at 110% — matches Chrome's 110% zoom level. */
+  zoom: 1.1;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-color) transparent;
 }
