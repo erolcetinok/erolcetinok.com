@@ -10,6 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
     "next": "^16.1.6",
     "next-mdx-remote": "^6.0.0",
@@ -27,5 +28,10 @@
     "eslint-config-next": "^16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "//overrides": "next pins vulnerable postcss/sharp and has no patched stable release yet; these force patched versions. Drop them once next ships >=16.3.0 stable. Never run `npm audit fix --force` here — it proposes next@9.3.3.",
+  "overrides": {
+    "sharp": "^0.35.3",
+    "postcss": "^8.5.25"
   }
 }
