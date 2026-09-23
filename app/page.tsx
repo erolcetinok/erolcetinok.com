@@ -43,8 +43,8 @@ export default async function Home() {
         <p className="home-bio__text">
           I build AI and robotics systems end-to-end, from evaluation software
           and robot learning to controls, CAD, and real hardware. Incoming Yale
-          &apos;30 student focused on mechanical engineering and computer
-          science. Currently at Ceramic.ai and seeking a Summer 2027 robotics/AI
+          &apos;30 student focused on mechanical engineering eand computer
+          science. Previously Ceramic.ai and seeking a Summer 2027 robotics/AI
           startup internship.
         </p>
       </section>
